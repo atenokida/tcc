@@ -15,3 +15,23 @@ month = sep,
 pages = {28–41},
 numpages = {14}
 }
+
+@article{10.1007/s00778-017-0480-7,
+author = {Leis, Viktor and Radke, Bernhard and Gubichev, Andrey and Mirchev, Atanas and Boncz, Peter and Kemper, Alfons and Neumann, Thomas},
+title = {Query optimization through the looking glass, and what we found running the Join Order Benchmark},
+year = {2018},
+issue_date = {October   2018},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+volume = {27},
+number = {5},
+issn = {1066-8888},
+url = {https://doi.org/10.1007/s00778-017-0480-7},
+doi = {10.1007/s00778-017-0480-7},
+abstract = {Finding a good join order is crucial for query performance. In this paper, we introduce the Join Order Benchmark that works on real-life data riddled with correlations and introduces 113 complex join queries. We experimentally revisit the main components in the classic query optimizer architecture using a complex, real-world data set and realistic multi-join queries. For this purpose, we describe cardinality-estimate injection and extraction techniques that allow us to compare the cardinality estimators of multiple industrial SQL implementations on equal footing, and to characterize the value of having perfect cardinality estimates. Our investigation shows that all industrial-strength cardinality estimators routinely produce large errors: though cardinality estimation using table samples solves the problem for single-table queries, there are still no techniques in industrial systems that can deal accurately with join-crossing correlated query predicates. We further show that while estimates are essential for finding a good join order, query performance is unsatisfactory if the query engine relies too heavily on these estimates. Using another set of experiments that measure the impact of the cost model, we find that it has much less influence on query performance than the cardinality estimates. We investigate plan enumeration techniques comparing exhaustive dynamic programming with heuristic algorithms and find that exhaustive enumeration improves performance despite the suboptimal cardinality estimates. Finally, we extend our investigation from main-memory only, to also include disk-based query processing. Here, we find that though accurate cardinality estimation should be the first priority, other aspects such as modeling random versus sequential I/O are also important to predict query runtime.},
+journal = {The VLDB Journal},
+month = oct,
+pages = {643–668},
+numpages = {26},
+keywords = {Query optimization, Join ordering, Cost models, Cardinality estimation}
+}
