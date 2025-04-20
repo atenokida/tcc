@@ -1,0 +1,9 @@
+# Object files
+*.o
+*.obj
+*.d
+*.old
+
+.vscode
+
+/misc
