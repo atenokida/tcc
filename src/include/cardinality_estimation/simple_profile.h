@@ -29,19 +29,7 @@ class SimpleProfile : public BaseEstimator {
  public:
   // Single predicate cardinality estimation member functions.
   const double EstimateEquality(const Table& table,
-                                const Predicate& predicate) const;  //{
-  //   std::unordered_map<std::string, AttributeStatistics<StatisticsVariant>>
-  //   tmp = RetrieveAttributeStatistics(table, {predicate.get_lhs()});
-  //   // -- DEBUG: remove this
-  //   std::string str("INDEX:5031:<string>");
-  //   std::cout << tmp.at(str).num_distinct_values << "\n";
-  //   // std::cout << tmp["INDEX:5031:<string>"].num_distinct_values << "\n";
-  //   // std::cout << tmp.at("INDEX:5031:<string>").max_value << "\n";
-  //   // std::cout << tmp.at("IBM_Adj_Close:5031:<double>").num_distinct_values
-  //   << "\n";
-  //   // -- end debug
-  //   return 0.0;
-  // };
+                                const Predicate& predicate) const;
 
   // Complex predicate (multiple predicates) cardinality estimation member
   // functions.
