@@ -1,0 +1,6 @@
+.Rhistory
+Rplots.pdf
+output/latex/plots/*.tex
+output/latex/plots/breakdowns/*.tex
+output/latex/evaluation.pdf
+output/pdf/*.pdf

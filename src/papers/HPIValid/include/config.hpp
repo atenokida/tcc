@@ -1,0 +1,21 @@
+#pragma once
+
+#include <chrono>
+
+namespace hpiv {
+
+struct Config {
+  // exponent for determining the number of sampled row pairs
+  double sample_exponent = 0.3;
+
+  // initial seed for the random number generator
+  unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+  // whether or not to copy the PLIs for better cache efficiency
+  bool copy_PLIs = true;
+
+  // whether or not to use the tiebreaker heuristic
+  bool tiebreaker_heuristic = true;
+};
+
+}  // namespace hpiv

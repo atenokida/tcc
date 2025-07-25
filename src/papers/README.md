@@ -1,0 +1,4 @@
+This folder contains cloned repositories from previous experiments related to cardinality estimation. See the list below for more information:  
+  - [having](https://github.com/moerkotte/having): [Cardinality Estimation for Having-Clauses](https://www.vldb.org/pvldb/vol18/p28-moerkotte.pdf).
+  - [JoinSketch](https://github.com/JoinSketch/JoinSketch/tree/main): [JoinSketch: A Sketch Algorithm for Accurate and Unbiased Inner-Product Estimation](https://yangtonghome.github.io/uploads/JoinSketch_2023.pdf).
+  <!--- [HPIValid](https://git.ae.hpi.de/thomas.blaesius/HPIValid?): [Hitting Set Enumeration with Partial Information for Unique Column Combination Discovery](https://www.vldb.org/pvldb/vol13/p2270-birnick.pdf). Used in this project for parsing ``.csv`` input files into a table data structure. -->

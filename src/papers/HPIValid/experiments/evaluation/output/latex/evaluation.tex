@@ -1,0 +1,71 @@
+\documentclass[table]{vldb}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{relsize}
+\usepackage{xspace}
+
+\newcommand{\scalingfactor}{0.8888}
+\newcommand*{\HPIV}{\texttt{HPIValid}\xspace}
+\newcommand*{\HYUCC}{\texttt{HyUCC}\xspace}
+
+\begin{document}
+
+\begin{figure}
+  \centering
+  \scalebox{\scalingfactor}{
+    \input{plots/sampling.tex}}
+  \caption{Sampling.}
+  \label{fig:sampling}
+\end{figure}
+
+\begin{table*}[p]
+  \rowcolors{1}{gray!15}{white}
+  \small
+  \centering
+  \input{plots/table.tex}
+  \caption{Run times and memory consumption of \HPIV and \HYUCC.}
+  \label{tab:results}
+\end{table*}
+
+\begin{figure}
+  \centering
+  \scalebox{\scalingfactor}{
+    \input{plots/scaling_columns_isolet.tex}}
+  \caption{Scaling with respect to the number of columns.}
+  \label{fig:scaling-col}
+\end{figure}
+
+\begin{figure*}
+  \centering
+  \scalebox{\scalingfactor}{
+    \input{plots/scaling_col_breakdown.tex}}
+  \caption{scaling.}
+  \label{fig:scaling-col-breakdown}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \scalebox{\scalingfactor}{
+    \input{plots/scaling_row_breakdown.tex}}
+  \caption{scaling.}
+  \label{fig:scaling-row-breakdown}
+\end{figure*}
+
+\begin{figure}
+  \centering
+  \scalebox{\scalingfactor}{
+    \input{plots/impl_detail.tex}}
+  \caption{Implementation details.}
+  \label{fig:impl-detail}
+\end{figure}
+
+\input{plots/efficiency_rel_sample_rate_large.tex}
+\input{plots/efficiency.tex}
+
+\end{document}

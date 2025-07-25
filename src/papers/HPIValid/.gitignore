@@ -1,0 +1,54 @@
+# CLion Build directories and project files
+
+cmake-build-debug
+cmake-build-release
+debug
+release
+.idea
+experiments/HyUCC/measurements/
+experiments/HyUCC/HyUCCTestRunner/
+experiments/measurements/
+experiments/evaluation/output/latex/serial_enum.pdf
+experiments/data_raw
+experiments/data_subtables
+*.aux
+*.log
+*.synctex.gz*
+# experiments/evaluation/*.pdf
+# experiments/results/*.csv
+
+.clangd
+compile_commands.json
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
