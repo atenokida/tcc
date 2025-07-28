@@ -34,8 +34,6 @@ const double SimpleProfile::EstimateEquality(const Table& table,
   // Since our experiments are for self-joins, the size of relations R and S are
   // always the same.
   const size_t relation_size = table.num_rows();
-  const auto attrs_stats = RetrieveAttributeStatistics(
-      table, {predicate.get_lhs(), predicate.get_rhs()});
 
   // There are several ways of getting the number of distinct values of a
   // attribute:
@@ -46,9 +44,9 @@ const double SimpleProfile::EstimateEquality(const Table& table,
   // We will use for the following experiment the approach of System R.
   // TODO: implement other approaches.
   const double attr_card_lhs = static_cast<double>(
-      attrs_stats.at(predicate.get_lhs()).num_distinct_values);
+      attributes_statistics_.at(predicate.get_lhs()).num_distinct_values);
   const double attr_card_rhs = static_cast<double>(
-      attrs_stats.at(predicate.get_rhs()).num_distinct_values);
+      attributes_statistics_.at(predicate.get_rhs()).num_distinct_values);
 
   const double relation_size_d = static_cast<double>(relation_size);
   const double result = (relation_size_d * relation_size_d) /

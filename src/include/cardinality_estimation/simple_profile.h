@@ -26,6 +26,11 @@ struct AttributeStatistics {
 
 class SimpleProfile : public BaseEstimator {
  public:
+  // Constructor.
+  // column_names is the list of attributes that will be used to store statistics.
+  SimpleProfile(const Table& table, const std::vector<std::string>& column_names)
+      : attributes_statistics_(RetrieveAttributeStatistics(table, column_names)) {}
+
   // Single predicate cardinality estimation member functions.
   const double EstimateEquality(const Table& table,
                                 const Predicate& predicate) const;
@@ -44,6 +49,8 @@ class SimpleProfile : public BaseEstimator {
   // column that is available in the table.
   std::unordered_map<std::string, AttributeStatistics<StatisticsVariant>>
   RetrieveAttributeStatistics(const Table& table, const std::vector<std::string>& column_names) const;
+
+  const std::unordered_map<std::string, AttributeStatistics<StatisticsVariant>> attributes_statistics_;
 };
 
 }  // namespace cardinality_estimation
