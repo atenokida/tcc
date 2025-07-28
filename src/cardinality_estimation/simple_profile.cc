@@ -22,7 +22,6 @@
 
 namespace cardinality_estimation {
 
-// Estimate single equality predicate.
 const double SimpleProfile::EstimateEquality(const Table& table,
                                              const Predicate& predicate) const
 {
