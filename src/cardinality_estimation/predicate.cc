@@ -13,7 +13,8 @@
 
 namespace cardinality_estimation {
 
-const Operator Predicate::StringToOperator(const std::string &op_str) {
+const Operator Predicate::StringToOperator(const std::string &op_str)
+{
   static const std::unordered_map<std::string, Operator> kStringToOperator = {
       {"=", Operator::kEqual},        {"!=", Operator::kNotEqual},
       {"<>", Operator::kNotEqual},    {"<", Operator::kLess},
@@ -28,7 +29,8 @@ const Operator Predicate::StringToOperator(const std::string &op_str) {
   throw std::invalid_argument("Unknown operator: " + op_str);
 }
 
-const std::string Predicate::OperatorToString(Operator op) {
+const std::string Predicate::OperatorToString(Operator op)
+{
   switch (op) {
     case Operator::kEqual:
       return "=";

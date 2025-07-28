@@ -43,11 +43,7 @@ class SimpleProfile : public BaseEstimator {
   // Retrieves a map of AttributeStatistics for each specified
   // column that is available in the table.
   std::unordered_map<std::string, AttributeStatistics<StatisticsVariant>>
-  RetrieveAttributeStatistics(
-      const Table& table, const std::vector<std::string>& column_names) const;
-
-  // std::unordered_map<std::string, AttributeStatistics<StatisticsVariant>>
-  //     attributes_statistics_;
+  RetrieveAttributeStatistics(const Table& table, const std::vector<std::string>& column_names) const;
 };
 
 }  // namespace cardinality_estimation

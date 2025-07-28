@@ -17,16 +17,15 @@
 #include <vector>
 
 #include "cardinality_estimation/table.h"
-#include "cardinality_estimation/utils.h"
+// #include "cardinality_estimation/utils.h" // temporarily removed
 #include "xtensor.hpp"
 
 namespace cardinality_estimation {
 
-// Estimate single equality predicate
+// Estimate single equality predicate.
 const double SimpleProfile::EstimateEquality(const Table& table,
-                                             const Predicate& predicate) const {
-  Utils::ValidatePredicate(table, predicate);
-
+                                             const Predicate& predicate) const
+{
   // Estimation of R⋈S: (nR * nS) / max(V(A,R), V(B,S)), where:
   //   - nR: number of rows in R;
   //   - nS: number of rows in S;
@@ -35,8 +34,8 @@ const double SimpleProfile::EstimateEquality(const Table& table,
   // For more information, see text Sec. 2.3.2.
   // Since our experiments are for self-joins, the size of relations R and S are
   // always the same.
-  size_t relation_size = table.num_rows();
-  auto attrs_stats = RetrieveAttributeStatistics(
+  const size_t relation_size = table.num_rows();
+  const auto attrs_stats = RetrieveAttributeStatistics(
       table, {predicate.get_lhs(), predicate.get_rhs()});
 
   // There are several ways of getting the number of distinct values of a
@@ -62,7 +61,8 @@ const double SimpleProfile::EstimateEquality(const Table& table,
 std::unordered_map<std::string,
                    AttributeStatistics<SimpleProfile::StatisticsVariant>>
 SimpleProfile::RetrieveAttributeStatistics(
-    const Table& table, const std::vector<std::string>& column_names) const {
+    const Table& table, const std::vector<std::string>& column_names) const
+{
   std::unordered_map<std::string,
                      AttributeStatistics<SimpleProfile::StatisticsVariant>>
       result;
