@@ -55,6 +55,27 @@ const double SimpleProfile::EstimateEquality(const Table& table,
   return result;
 }
 
+const double SimpleProfile::EstimateEquality(
+    const Table& table, std::vector<Predicate>& predicates) const
+{
+  double exp_sel = 1;
+
+  // The maximum size of a self-join of a relation R is |R|².
+  const size_t max_relation_size = std::pow(table.num_rows(), 2);
+
+  // Calculate the selectivity of each predicate and multiply them together.
+  // Remember that the selectivity is the fraction of tuples that qualifies the predicate.
+  // The expression selectivity is calculated as the product of a sequence of predicates selectivities.
+  for (const auto& predicate: predicates) {
+    const auto card_est = SimpleProfile::EstimateEquality(table, predicate);
+    const double pred_sel = card_est / max_relation_size;
+    exp_sel *= pred_sel;
+  }
+
+  // We multiply the expression selectivity by the max. self-join size to get the cardinality estimation.
+  return exp_sel * max_relation_size;
+};
+
 std::unordered_map<std::string,
                    AttributeStatistics<SimpleProfile::StatisticsVariant>>
 SimpleProfile::RetrieveAttributeStatistics(

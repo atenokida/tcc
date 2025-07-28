@@ -32,15 +32,27 @@ class SimpleProfile : public BaseEstimator {
       : attributes_statistics_(RetrieveAttributeStatistics(table, column_names)) {}
 
   // Single predicate cardinality estimation member functions.
+  // This function returns the cardinality estimation, i.e., the expected number
+  // of tuples that will be emitted by running the predicate on the table.
   const double EstimateEquality(const Table& table,
                                 const Predicate& predicate) const;
 
   // Complex predicate (multiple predicates) cardinality estimation member
   // functions.
-  const double EstimateEquality(
-      const Table& table, std::vector<const Predicate>& predicates) const {
-    return 0.0;
-  };
+  // Description: for complex predicates, the approach is to estimate each
+  // predicate independently and then compute the final estimation by using
+  // the independence assumption, i.e., assume there is no correlation between
+  // attributes. e.g., "t.A = t'.A ∧ t.B = t'.B" is estimated by the formula:
+  // sel(t.A = t'.A) x sel(t.B = t'.B), where sel(pred) is the selectivity of
+  // the predicate pred.
+  // Note that:
+  //  - selectivity: the fraction of tuples that qualifies the predicate;
+  //  - cardinality: the number of rows will be emitted (i.e., are in the
+  //                 resultant set) by the querying predicate.
+  // This function returns the cardinality estimation, i.e., the expected number
+  // of tuples that will be emitted by running the predicate on the table.
+  const double EstimateEquality(const Table& table,
+                                std::vector<Predicate>& predicates) const;
 
  private:
   using StatisticsVariant = std::variant<int, double, std::string>;
