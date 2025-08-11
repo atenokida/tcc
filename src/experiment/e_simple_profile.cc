@@ -1,0 +1,51 @@
+#include "experiment/e_simple_profile.h"
+
+#include <chrono>  // high_resolution_clock, duration
+
+namespace cardinality_estimation {
+
+void RunSimpleProfileEqual(const struct cardinality_estimation::ExperimentConfig& config)
+{
+  // `column_names` hold all attribute names that some statistics
+  // will be available for estimations. Those statistics are built uppon
+  // calling the constructor of SimpleProfile class.
+  // For this experiment we assume that the statistics are already available
+  // just like a index would be available in the database system. Therefore
+  // we don't track the time for getting attribute statistics.
+  std::vector<std::string> column_names;
+  for (const auto& experiment : config.predicates) {
+    for (const auto& predicate : experiment) {
+      column_names.push_back(predicate.lhs());
+      column_names.push_back(predicate.rhs());
+    }
+  }
+
+  cardinality_estimation::SimpleProfile sp(*config.table.get(), column_names);
+
+  auto total_start = std::chrono::high_resolution_clock::now();
+
+  // Experiments.
+  for (const auto& experiment : config.predicates) {
+    auto start = std::chrono::high_resolution_clock::now();
+    double estimate;
+
+    if (experiment.size() == 1)
+      estimate = sp.EstimateEquality(*config.table.get(), experiment[0]);
+    else
+      estimate = sp.EstimateEquality(*config.table.get(), experiment);
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> elapsed = end - start;
+    
+    cardinality_estimation::PrintExpression(experiment);
+    std::cout << "Estimate = " << estimate
+              << "\nTime = " << elapsed.count() << " ms" << "\n"
+              << "-------------------------------------------\n";
+  }
+  
+  auto total_end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double, std::milli> total_time = total_end - total_start;
+  std::cout << "Total execution time: " << total_time.count() << " ms" << "\n";
+}
+
+}  // namespace cardinality_estimation
