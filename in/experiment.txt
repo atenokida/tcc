@@ -1,0 +1,3 @@
+IBM.csv
+INDEX:5031:<string> = INDEX:5031:<string>
+INDEX:5031:<string> = INDEX:5031:<string> AND IBM_High:5031:<double> = INDEX:5031:<string>
