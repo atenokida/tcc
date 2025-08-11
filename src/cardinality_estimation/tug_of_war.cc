@@ -19,8 +19,8 @@
 namespace cardinality_estimation {
 
 TugOfWar::TugOfWar(const unsigned int depth, 
-                  const unsigned int width, 
-                  const uint32_t hash_seed)
+                   const unsigned int width, 
+                   const uint32_t hash_seed)
   : depth_(depth),
     width_(width / 4 / depth), // !WARNING - No validation for division by 0
     hash_seed_(hash_seed)
