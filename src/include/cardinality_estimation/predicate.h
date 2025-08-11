@@ -36,8 +36,8 @@ class Predicate {
 
   // Member functions.
  public:
-  const std::string &get_lhs() const { return lhs_; };
-  const std::string &get_rhs() const { return rhs_; };
+  const std::string &lhs() const { return lhs_; };
+  const std::string &rhs() const { return rhs_; };
   const Operator &get_op() const { return operator_; };
   std::string ToString() const {
     return lhs_ + " " + OperatorToString(operator_) + " " + rhs_;

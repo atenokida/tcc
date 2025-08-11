@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <utility>
+#include <vector>
 
 #include "predicate.h"
 #include "table.h"
@@ -25,7 +26,7 @@ class BaseEstimator {
   // Complex predicate (multiple predicates) cardinality estimation member
   // functions.
   virtual const double EstimateEquality(
-      const Table& table, std::vector<const Predicate>& predicates) const = 0;
+      const Table& table, std::vector<Predicate>& predicates) const = 0;
 };
 
 }  // namespace cardinality_estimation

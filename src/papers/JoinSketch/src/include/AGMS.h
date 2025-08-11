@@ -17,7 +17,8 @@ class est : public Sketch {
 
  public:
   est(int _w, int _d, int _hash_seed = 1000) {
-    d = _d, w = _w / 4 / _d;
+    d = _d; 
+    w = _w / 4 / _d; // _w = memory in bytes?
     // printf("%d\n",w);
     hash_seed = _hash_seed;
     for (int i = 0; i < d; i++) {
