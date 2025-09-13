@@ -14,7 +14,6 @@
 #include <memory>  // shared_ptr
 #include <vector>
 
-#include "base_estimator.h"
 #include "predicate.h"
 #include "table.h"
 
