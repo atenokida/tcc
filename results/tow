@@ -1,0 +1,9 @@
+TUG-OF-WAR,Origin = Origin,9.99998e+11,32165.9
+TUG-OF-WAR,Origin = Origin AND Destination = Destination,2.99999e+12,67808.5
+TUG-OF-WAR,TOTAL,,99974.6
+TUG-OF-WAR,AreaCode = AreaCode AND Phone = Phone,1.23509e+10,71735.5
+TUG-OF-WAR,State = State AND HasChild = HasChild,2.01929e+12,69210.4
+TUG-OF-WAR,TOTAL,,140946
+TUG-OF-WAR,title = title AND prodyear = prodyear,1.04058e+12,68461.8
+TUG-OF-WAR,prodyear = prodyear,1.07239e+12,34539.2
+TUG-OF-WAR,TOTAL,,103001
