@@ -40,15 +40,21 @@ TugOfWar::TugOfWar(const unsigned int depth,
 const double TugOfWar::EstimateEquality(
   const Table& table, 
   const Predicate& predicate)
-{ 
-  // Since Tug-of-War only estimate col. homogeneous predicates
-  // it doesn't matter which attribute we get.
+{
+  if (predicate.lhs() != predicate.rhs()) {
+    std::cout << "WARNING: Tug-of-War only supports " 
+              << "column homogeneous predicates.\n";
+    return -1;
+  }
+
+  // Since Tug-of-War only estimate column homogeneous predicates,
+  // it doesn't matter from which side of the predicate we get the attribute.
   std::string column_name = predicate.lhs();
 
   if (!table.has_column(column_name))
     throw std::runtime_error("Column not found: " + column_name);
 
-  const auto& column = table.get_column(column_name);
+  const auto& column_data = table.get_column(column_name);
 
   // Build the sketch.
   std::visit(
@@ -65,7 +71,7 @@ const double TugOfWar::EstimateEquality(
       }
 
     }, 
-    column);
+    column_data);
   
   // Estimate
   return F2Est(*this);

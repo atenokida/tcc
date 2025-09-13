@@ -19,10 +19,10 @@ int main(const int argc, const char** argv)
   /**-------------- CONFIG. VALUES --------------*/
   //todo: Add parsing on main loop to read configuration values and avoid the need to recompile the program.
 
-  // # groups
+  // Number of groups
   constexpr int tow_depth = 5;
-  // # estimators per group
-  // Formula: 10240/4/#groups = 10240/4/5 = 512
+  // Number estimators per group.
+  // 10240/4/#groups = 10240/4/5 = 512
   constexpr int tow_width = 10240;
   /*--------------- END OF CONFIG ---------------*/
 

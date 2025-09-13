@@ -29,4 +29,7 @@ extern void PrintExpression(const std::vector<Predicate>& predicates);
 // Prints configuration.
 extern void ShowConfig(const ExperimentConfig& config);
 
+// Converts a vector of predicates to a string representation.
+extern std::string ExpressionToString(const std::vector<Predicate>& predicates);
+
 }  // namespace cardinality_estimation

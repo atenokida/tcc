@@ -77,4 +77,18 @@ void ShowConfig(const ExperimentConfig& config)
   }
 }
 
+std::string ExpressionToString(const std::vector<Predicate>& predicates)
+{
+  std::string result;
+
+  for (size_t i = 0; i < predicates.size(); ++i) {
+    result += predicates[i].ToString();
+    if (i < predicates.size() - 1)
+      // Currently support only conjunctions.
+      result += " AND ";
+  }
+
+  return result;
+}
+
 }  // namespace cardinality_estimation

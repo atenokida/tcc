@@ -11,6 +11,9 @@ namespace cardinality_estimation {
 // CSV Loading Implementation
 void Table::load_csv(const std::string& filename, bool has_header,
                      char delimiter) {
+  // DEBUG
+  std::cout << "Opening: [" << filename << "]\n";
+  
   std::ifstream file(filename);
   if (!file.is_open()) {
     throw std::runtime_error("Cannot open file: " + filename);

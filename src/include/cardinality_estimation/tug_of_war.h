@@ -38,12 +38,9 @@ class TugOfWar {
   const double EstimateEquality(const Table& table, 
                                 const Predicate& predicate);
 
-  // Note that the AGMS Sketch (Tug-of-War) only supports one equality predicate
-  // at a time. The naive solution for this problem is to run a separate
-  // sketch for each predicate and combine the results using the 
-  // independence assumption (this solution is similar to complex 
-  // predicates on `simple_profile.h`).
-  // This may not be the most efficient solution, but it is a simple workaround.
+  // Tug-of-War only supports single equality predicates.
+  // For conjunctive predicates, we hash combined attribute values
+  // as one distinct value.
   const double EstimateEquality(const Table& table, 
                                 const std::vector<Predicate>& predicates);
 
@@ -52,17 +49,17 @@ class TugOfWar {
 
   // Overloaded function for single equality predicate estimate in case the 
   // sketch is already built.
-  // FOR EXPERIMENTS CONTAINING UPDATES
-  static const double EstimateEquality(const Table& table, 
-                                       const Predicate& predicate,
-                                       const TugOfWar& sketch){return 0.0;};
+  // UNCOMMENT WHEN IMPLEMENTING INCREMENTABILITY COMPARISONS
+  // static const double EstimateEquality(const Table& table, 
+  //                                      const Predicate& predicate,
+  //                                      const TugOfWar& sketch){return 0.0;};
 
   // Overloaded function for complex equalities predicate estimate in case the
   // sketch is already built.
-  // FOR EXPERIMENTS CONTAINING UPDATES
-  static const double EstimateEquality(const Table& table, 
-                                       const Predicate& predicate,
-                                       const std::vector<TugOfWar>& sketches){return 0.0;};
+  // UNCOMMENT WHEN IMPLEMENTING INCREMENTABILITY COMPARISONS
+  // static const double EstimateEquality(const Table& table, 
+  //                                      const Predicate& predicate,
+  //                                      const std::vector<TugOfWar>& sketches){return 0.0;};
 
  private:
   // Insert element into summary.

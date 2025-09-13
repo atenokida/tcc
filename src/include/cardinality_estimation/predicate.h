@@ -27,16 +27,16 @@ enum class Operator {
 // side (rhs). The operator can be one of the following: ==, != (or <>), <, <=,
 // > and >=.
 class Predicate {
-  // Constructor.
  public:
   // https://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c
   Predicate(const std::string &lhs, const std::string &op,
             const std::string &rhs)
       : lhs_(lhs), rhs_(rhs), operator_(StringToOperator(op)){};
 
-  // Member functions.
  public:
+  // Returns the attribute name on the left-hand side.
   const std::string &lhs() const { return lhs_; };
+  // Returns the attribute name on the right-hand side.
   const std::string &rhs() const { return rhs_; };
   const Operator &get_op() const { return operator_; };
   std::string ToString() const {
@@ -47,7 +47,6 @@ class Predicate {
   static const Operator StringToOperator(const std::string &op_str);
   static const std::string OperatorToString(Operator op);
 
-  // Data members.
  private:
   const std::string lhs_;
   const std::string rhs_;
