@@ -9,12 +9,15 @@
 
 #include <algorithm>  // sort
 #include <cstring>  // memset
+#include <functional>  // hash
 #include <iterator>  // ostream_iterator
 #include <memory>  // shared_ptr, unique_ptr, make_unique
 #include <stdexcept>  // invalid_argument, runtime_error
 #include <type_traits>  // is_same
+#include <vector>  // vector
 
 #include "MurmurHash.h"
+#include "cardinality_estimation/vec_hash.h" // template specialization for hash<vec<size_t>>
 
 namespace cardinality_estimation {
 
@@ -68,12 +71,63 @@ const double TugOfWar::EstimateEquality(
   return F2Est(*this);
 }
 
+// TODO: We can save some memory by removing vector `rows_hashes` if we
+//       process the table in a row-wise manner instead of column-wise.
 const double TugOfWar::EstimateEquality(
   const Table& table, 
   const std::vector<Predicate>& predicates)
 {
-  // implement me
-  return 0.0;
+  // We hash all attributes on the predicates for each row.
+  // Each internal vector holds the hash codes of each attribute
+  // appearing on the predicate for a specific row.
+  std::vector<std::vector<std::size_t>> rows_hashes;
+  rows_hashes.resize(table.num_rows());
+
+  for (const auto& predicate: predicates) {
+    if (predicate.lhs() != predicate.rhs()) {
+      std::cout << "WARNING: Tug-of-War only supports " 
+                << "column homogeneous predicates.\n";
+      return -1;
+    }
+  
+    const std::string column_name = predicate.lhs();
+    const auto& column_data = table.get_column(column_name);
+
+    std::visit(
+      [&table, &rows_hashes](const auto& arg) {
+        using T = std::decay_t<decltype(arg)>;
+
+        if constexpr(std::is_same_v<T, xt::xarray<double>>) {
+          std::hash<double> double_hash;
+          for (std::size_t i = 0; i < table.num_rows(); ++i)
+            rows_hashes.at(i).push_back(double_hash(arg(i)));
+
+        } else if constexpr(std::is_same_v<T, xt::xarray<int>>) {
+          std::hash<int> int_hash;
+          for (std::size_t i = 0; i < table.num_rows(); ++i)
+            rows_hashes.at(i).push_back(int_hash(arg(i)));
+
+        } else if constexpr(std::is_same_v<T, xt::xarray<std::string>>) {
+          std::hash<std::string> str_hash;
+          for (std::size_t i = 0; i < table.num_rows(); ++i)
+            rows_hashes.at(i).push_back(str_hash(arg(i)));
+        }
+
+      },
+    column_data);
+
+    std::hash<std::vector<std::size_t>> tuple_hash;
+    for (const auto& tuple : rows_hashes) {
+      const std::size_t tuple_hash_code = tuple_hash(tuple);
+
+      // Update(static_cast<const void*>(tuple_hash_code));
+      Update(&tuple_hash_code);
+    }
+
+  }
+
+  // Estimate
+  return F2Est(*this);
 }
 
 // This is an adaptation of the `Insert()`
