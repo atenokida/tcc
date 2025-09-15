@@ -1,9 +1,36 @@
-TUG-OF-WAR,Origin = Origin,9.99998e+11,32165.9
-TUG-OF-WAR,Origin = Origin AND Destination = Destination,2.99999e+12,67808.5
-TUG-OF-WAR,TOTAL,,99974.6
-TUG-OF-WAR,AreaCode = AreaCode AND Phone = Phone,1.23509e+10,71735.5
-TUG-OF-WAR,State = State AND HasChild = HasChild,2.01929e+12,69210.4
-TUG-OF-WAR,TOTAL,,140946
-TUG-OF-WAR,title = title AND prodyear = prodyear,1.04058e+12,68461.8
-TUG-OF-WAR,prodyear = prodyear,1.07239e+12,34539.2
-TUG-OF-WAR,TOTAL,,103001
+TUG-OF-WAR,AreaCode = AreaCode AND Phone = Phone,10000,1.25716e+06,678.362
+TUG-OF-WAR,State = State AND HasChild = HasChild,10000,2.01908e+08,627.92
+TUG-OF-WAR,TOTAL,,1306.4
+TUG-OF-WAR,AreaCode = AreaCode AND Phone = Phone,100000,1.23612e+08,6715.95
+TUG-OF-WAR,State = State AND HasChild = HasChild,100000,2.02013e+10,6301.6
+TUG-OF-WAR,TOTAL,,13017.7
+TUG-OF-WAR,AreaCode = AreaCode AND Phone = Phone,500000,3.09568e+09,33590.4
+TUG-OF-WAR,State = State AND HasChild = HasChild,500000,5.04908e+11,31301.1
+TUG-OF-WAR,TOTAL,,64891.7
+TUG-OF-WAR,AreaCode = AreaCode AND Phone = Phone,999999,1.23509e+10,67096.4
+TUG-OF-WAR,State = State AND HasChild = HasChild,999999,2.01929e+12,63064.6
+TUG-OF-WAR,TOTAL,,130161
+TUG-OF-WAR,Origin = Origin,10000,1e+08,315.923
+TUG-OF-WAR,Origin = Origin AND Destination = Destination,10000,3e+08,642.666
+TUG-OF-WAR,TOTAL,,958.722
+TUG-OF-WAR,Origin = Origin,100000,1e+10,3101.45
+TUG-OF-WAR,Origin = Origin AND Destination = Destination,100000,3e+10,6277.53
+TUG-OF-WAR,TOTAL,,9379.09
+TUG-OF-WAR,Origin = Origin,500000,2.5e+11,15531.7
+TUG-OF-WAR,Origin = Origin AND Destination = Destination,500000,7.5e+11,31457.2
+TUG-OF-WAR,TOTAL,,46989
+TUG-OF-WAR,Origin = Origin,999999,9.99998e+11,31193.5
+TUG-OF-WAR,Origin = Origin AND Destination = Destination,999999,2.99999e+12,63161.8
+TUG-OF-WAR,TOTAL,,94355.4
+TUG-OF-WAR,title = title AND prodyear = prodyear,10000,1.04308e+08,651.938
+TUG-OF-WAR,prodyear = prodyear,10000,1.0754e+08,333.565
+TUG-OF-WAR,TOTAL,,985.61
+TUG-OF-WAR,title = title AND prodyear = prodyear,100000,1.0398e+10,6480.4
+TUG-OF-WAR,prodyear = prodyear,100000,1.07181e+10,3322.27
+TUG-OF-WAR,TOTAL,,9802.78
+TUG-OF-WAR,title = title AND prodyear = prodyear,500000,2.60068e+11,32510
+TUG-OF-WAR,prodyear = prodyear,500000,2.68032e+11,16588.5
+TUG-OF-WAR,TOTAL,,49098.6
+TUG-OF-WAR,title = title AND prodyear = prodyear,999999,1.04058e+12,64789.1
+TUG-OF-WAR,prodyear = prodyear,999999,1.07239e+12,33131.2
+TUG-OF-WAR,TOTAL,,97920.4
