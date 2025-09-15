@@ -16,6 +16,8 @@
 #include <type_traits>  // is_same
 #include <vector>  // vector
 
+#include <boost/functional/hash.hpp>  // boost::hash
+
 #include "MurmurHash.h"
 #include "cardinality_estimation/vec_hash.h" // template specialization for hash<vec<size_t>>
 
@@ -122,11 +124,10 @@ const double TugOfWar::EstimateEquality(
       },
     column_data);
 
-    std::hash<std::vector<std::size_t>> tuple_hash;
+    boost::hash<std::vector<std::size_t>> tuple_hasher;
     for (const auto& tuple : rows_hashes) {
-      const std::size_t tuple_hash_code = tuple_hash(tuple);
-
-      // Update(static_cast<const void*>(tuple_hash_code));
+      const std::size_t tuple_hash_code = tuple_hasher(tuple);
+      
       Update(&tuple_hash_code);
     }
 
