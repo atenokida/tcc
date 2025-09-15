@@ -53,6 +53,7 @@ void RunSimpleProfileEqual(const struct cardinality_estimation::ExperimentConfig
 
     ofs << "SIMPLE-PROFILE,"
         << cardinality_estimation::ExpressionToString(experiment) << ","
+        << config.table->num_rows() << ","
         << estimate << ","
         << elapsed.count() << "\n";
   }
@@ -61,7 +62,7 @@ void RunSimpleProfileEqual(const struct cardinality_estimation::ExperimentConfig
   std::chrono::duration<double, std::milli> total_time = total_end - total_start;
   std::cout << "Total execution time: " << total_time.count() << " ms" << "\n";
 
-  ofs << "SIMPLE-PROFILE,TOTAL,," << total_time.count() << "\n";
+  ofs << "SIMPLE-PROFILE,TOTAL,,," << total_time.count() << "\n";
 
   ofs.close();
 }

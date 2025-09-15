@@ -43,6 +43,7 @@ void RunTugOfWar(const struct cardinality_estimation::ExperimentConfig& config,
 
     ofs << "TUG-OF-WAR,"
         << cardinality_estimation::ExpressionToString(experiment) << ","
+        << config.table->num_rows() << ","
         << estimate << ","
         << elapsed.count() << "\n";
   }
@@ -51,7 +52,7 @@ void RunTugOfWar(const struct cardinality_estimation::ExperimentConfig& config,
   std::chrono::duration<double, std::milli> total_time = total_end - total_start;
   std::cout << "Total execution time: " << total_time.count() << " ms" << "\n";
 
-  ofs << "TUG-OF-WAR,TOTAL,," << total_time.count() << "\n";
+  ofs << "TUG-OF-WAR,TOTAL,,," << total_time.count() << "\n";
 
   ofs.close();
 }
