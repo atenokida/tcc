@@ -59,22 +59,26 @@ const double SimpleProfile::EstimateEquality(const Table& table,
 const double SimpleProfile::EstimateEquality(
     const Table& table, const std::vector<Predicate>& predicates) const
 {
-  double exp_sel = 1;
+  const size_t relation_size = table.num_rows();
+  
+  size_t num_distinct_lhs = 1;
+  size_t num_distinct_rhs = 1;
 
-  // The maximum size of a self-join of a relation R is |R|².
-  const size_t max_relation_size = std::pow(table.num_rows(), 2);
+  for (const auto& predicate : predicates) {
+    const size_t attr_card_lhs = static_cast<size_t>(
+        attributes_statistics_.at(predicate.lhs()).num_distinct_values);
+    const size_t attr_card_rhs = static_cast<size_t>(
+        attributes_statistics_.at(predicate.rhs()).num_distinct_values);
 
-  // Calculate the selectivity of each predicate and multiply them together.
-  // Remember that the selectivity is the fraction of tuples that qualifies the predicate.
-  // The expression selectivity is calculated as the product of a sequence of predicates selectivities.
-  for (const auto& predicate: predicates) {
-    const auto card_est = SimpleProfile::EstimateEquality(table, predicate);
-    const double pred_sel = card_est / max_relation_size;
-    exp_sel *= pred_sel;
+    num_distinct_lhs *= attr_card_lhs;
+    num_distinct_rhs *= attr_card_rhs;
   }
 
-  // We multiply the expression selectivity by the max. self-join size to get the cardinality estimation.
-  return exp_sel * max_relation_size;
+  const double relation_size_d = static_cast<double>(relation_size);
+  const double result = (relation_size_d * relation_size_d) /
+                        static_cast<double>(std::max(num_distinct_lhs, num_distinct_rhs));
+  
+  return result;
 }
 
 std::unordered_map<std::string,
@@ -88,15 +92,12 @@ SimpleProfile::RetrieveAttributeStatistics(
 
   for (const auto& column_name : column_names) {
     try {
-      // Check if the column exists in the table
       if (!table.has_column(column_name))
         throw std::runtime_error("Column not found: " + column_name);
 
-      // Check if the column is already in the result map
       if (result.find(column_name) != result.end())
         continue;
 
-      // Get column data from the table
       const auto& column = table.get_column(column_name);
 
       // std::visit takes a variant and a set of
@@ -121,34 +122,16 @@ SimpleProfile::RetrieveAttributeStatistics(
                 *std::min_element(arg.begin(), arg.end()));
             stats.max_value = static_cast<std::string>(
                 *std::max_element(arg.begin(), arg.end()));
-
-            // std::string test = static_cast<std::string>(*std::min_element(
-            //     arg.begin(), arg.end()));  // DEBUG: remove this
-            // std::string test1 = static_cast<std::string>(*std::max_element(
-            //     arg.begin(), arg.end()));  // DEBUG: remove this
-
-            // std::cout << arg.at(1) << "\n";              // DEBUG: remove
-            // this std::cout << "DEBUG min: " << test << "\n";  // DEBUG:
-            // remove this std::cout << "DEBUG max: " << test1
-            //           << "\n";  // DEBUG: remove this
-            // std::cout << "DEBUG: " << stats.min_value << "\n";  // DEBUG:
-            // remove this std::cout << "DEBUG: " << stats.max_value << "\n";
-            // // DEBUG: remove this
           } else {
             throw std::runtime_error("Unsupported column type");
           }
 
-          // We currently support only fundamental (primitive) types.
-          // The usage of size() in this scenario will not
-          // result in errors since all vectors are unidimensional (i.e.,
-          // there isn't a column with a multidimensional data type).
           stats.num_distinct_values =
               static_cast<uint32_t>(xt::unique(arg).size());
           result.insert(std::make_pair(column_name, stats));
         },
         column);
 
-      // result.insert(std::make_pair(column_name, stats));
     } catch (const std::runtime_error& e) {
       throw std::invalid_argument("Column not found: " + column_name);
     }
