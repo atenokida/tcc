@@ -17,9 +17,6 @@ void RunSimpleProfileEqual(const struct cardinality_estimation::ExperimentConfig
   // `column_names` hold all attribute names that some statistics
   // will be available for estimations. Those statistics are built uppon
   // calling the constructor of SimpleProfile class.
-  // For this experiment we assume that the statistics are already available
-  // just like a index would be available in the database system. Therefore
-  // we don't track the time for getting attribute statistics.
   std::vector<std::string> column_names;
   for (const auto& experiment : config.predicates) {
     for (const auto& predicate : experiment) {
@@ -28,9 +25,9 @@ void RunSimpleProfileEqual(const struct cardinality_estimation::ExperimentConfig
     }
   }
 
-  cardinality_estimation::SimpleProfile sp(*config.table.get(), column_names);
-
   auto total_start = std::chrono::high_resolution_clock::now();
+
+  cardinality_estimation::SimpleProfile sp(*config.table.get(), column_names);
 
   // Experiments.
   for (const auto& experiment : config.predicates) {
