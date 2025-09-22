@@ -9,6 +9,9 @@
 
 namespace cardinality_estimation {
 
+// Struct ExperimentConfig.
+//  - table: unique pointer to the table.
+//  - predicates: bi-dimensional vector (each internal vector is a experiment).
 struct ExperimentConfig {
   std::unique_ptr<Table> table;
   std::vector<std::vector<Predicate>> predicates;
