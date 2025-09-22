@@ -1,11 +1,13 @@
 
 #include <iostream>
 
+#include "include/cardinality_estimation/count_min_sketch.h"
 #include "include/cardinality_estimation/predicate.h"
 #include "include/cardinality_estimation/simple_profile.h"
 #include "include/cardinality_estimation/table.h"
 #include "include/cardinality_estimation/tug_of_war.h"
 #include "include/cardinality_estimation/utils.h"
+#include "include/experiment/e_count_min_sketch.h"
 #include "include/experiment/e_simple_profile.h"
 #include "include/experiment/e_tug_of_war.h"
 

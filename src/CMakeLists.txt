@@ -18,11 +18,13 @@ find_package(Boost REQUIRED)
 # Source files
 set(SOURCES
     main.cc
+    cardinality_estimation/count_min_sketch.cc
     cardinality_estimation/predicate.cc
     cardinality_estimation/simple_profile.cc
     cardinality_estimation/tug_of_war.cc
     cardinality_estimation/table.cc
     cardinality_estimation/utils.cc
+    experiment/e_count_min_sketch.cc
     experiment/e_simple_profile.cc
     experiment/e_tug_of_war.cc
 )
