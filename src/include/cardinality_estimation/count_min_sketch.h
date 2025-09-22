@@ -14,6 +14,8 @@ extern "C" {
 
 #include <stdint.h>
 
+#include <cstddef>  // NULL
+
 #define COUNT_MIN_SKETCH_VERSION "0.1.8"
 
 /*  CMS_ERROR is problematic in that it is difficult to check for the error
@@ -210,6 +212,48 @@ int cms_merge(CountMinSketch* cms, int num_sketches, ...);
                       to allocate the correct memory, etc.
 */
 int cms_merge_into(CountMinSketch* cms, int num_sketches, ...);
+
+/**------------------------------------------------------------------------
+**                       Adapted code below
+*------------------------------------------------------------------------**/
+
+int32_t cms_add_inc_int(CountMinSketch* cms, int64_t key, uint32_t x);
+static __inline__ int32_t cms_add_int(CountMinSketch* cms, int64_t key) {
+  return cms_add_inc_int(cms, key, 1);
+}
+int32_t cms_remove_inc_int(CountMinSketch* cms, int64_t key, uint32_t x);
+static __inline__ int32_t cms_remove_int(CountMinSketch* cms, int64_t key) {
+  return cms_remove_inc_int(cms, key, 1);
+}
+int32_t cms_check_int(CountMinSketch* cms, int64_t key);
+static __inline__ int32_t cms_check_min_int(CountMinSketch* cms, int64_t key) {
+  return cms_check_int(cms, key);
+}
+int32_t cms_check_mean_int(CountMinSketch* cms, int64_t key);
+int32_t cms_check_mean_min_int(CountMinSketch* cms, int64_t key);
+
+/* Functions to support float keys */
+int32_t cms_add_inc_float(CountMinSketch* cms, double key, uint32_t x);
+static __inline__ int32_t cms_add_float(CountMinSketch* cms, double key) {
+  return cms_add_inc_float(cms, key, 1);
+}
+int32_t cms_remove_inc_float(CountMinSketch* cms, double key, uint32_t x);
+static __inline__ int32_t cms_remove_float(CountMinSketch* cms, double key) {
+  return cms_remove_inc_float(cms, key, 1);
+}
+int32_t cms_check_float(CountMinSketch* cms, double key);
+static __inline__ int32_t cms_check_min_float(CountMinSketch* cms, double key) {
+  return cms_check_float(cms, key);
+}
+int32_t cms_check_mean_float(CountMinSketch* cms, double key);
+int32_t cms_check_mean_min_float(CountMinSketch* cms, double key);
+
+uint64_t* cms_get_hashes_int(CountMinSketch* cms, int64_t key);
+uint64_t* cms_get_hashes_float(CountMinSketch* cms, double key);
+
+/**------------------------------------------------------------------------
+**                       END SECTION
+*------------------------------------------------------------------------**/
 
 #ifdef __cplusplus
 }  // extern "C"

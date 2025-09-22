@@ -5,8 +5,6 @@
 ***     License: MIT 2017
 *******************************************************************************/
 
-#include "count_min_sketch.h"
-
 #include <inttypes.h> /* PRIu64 */
 #include <limits.h>
 #include <math.h>
@@ -15,6 +13,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "cardinality_estimation/count_min_sketch.h"
 
 #define LOG_TWO 0.6931471805599453
 
@@ -29,7 +29,11 @@ static void __merge_cms(CountMinSketch* base, int num_sketches, va_list* args);
 static int __validate_merge(CountMinSketch* base, int num_sketches,
                             va_list* args);
 static uint64_t* __default_hash(unsigned int num_hashes, const char* key);
+static uint64_t* __default_hash_int(unsigned int num_hashes, int64_t key);
+static uint64_t* __default_hash_float(unsigned int num_hashes, double key);
 static uint64_t __fnv_1a(const char* key, int seed);
+static uint64_t __fnv_1a_int(int64_t key, int seed);
+static uint64_t __fnv_1a_float(double key, int seed);
 static int __compare(const void* a, const void* b);
 static int32_t __safe_add(int32_t a, uint32_t b);
 static int32_t __safe_sub(int32_t a, uint32_t b);
@@ -430,6 +434,105 @@ static uint64_t* __default_hash(unsigned int num_hashes, const char* str) {
   return results;
 }
 
+/* Integer key support */
+uint64_t* cms_get_hashes_int(CountMinSketch* cms, int64_t key) {
+  return __default_hash_int(cms->depth, key);
+}
+
+int32_t cms_add_inc_int(CountMinSketch* cms, int64_t key, uint32_t x) {
+  uint64_t* hashes = cms_get_hashes_int(cms, key);
+  int32_t num_add = cms_add_inc_alt(cms, hashes, cms->depth, x);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_remove_inc_int(CountMinSketch* cms, int64_t key, uint32_t x) {
+  uint64_t* hashes = cms_get_hashes_int(cms, key);
+  int32_t num_add = cms_remove_inc_alt(cms, hashes, cms->depth, x);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_check_int(CountMinSketch* cms, int64_t key) {
+  uint64_t* hashes = cms_get_hashes_int(cms, key);
+  int32_t num_add = cms_check_alt(cms, hashes, cms->depth);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_check_mean_int(CountMinSketch* cms, int64_t key) {
+  uint64_t* hashes = cms_get_hashes_int(cms, key);
+  int32_t num_add = cms_check_mean_alt(cms, hashes, cms->depth);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_check_mean_min_int(CountMinSketch* cms, int64_t key) {
+  uint64_t* hashes = cms_get_hashes_int(cms, key);
+  int32_t num_add = cms_check_mean_min_alt(cms, hashes, cms->depth);
+  free(hashes);
+  return num_add;
+}
+
+/* Float key support */
+uint64_t* cms_get_hashes_float(CountMinSketch* cms, double key) {
+  return __default_hash_float(cms->depth, key);
+}
+
+int32_t cms_add_inc_float(CountMinSketch* cms, double key, uint32_t x) {
+  uint64_t* hashes = cms_get_hashes_float(cms, key);
+  int32_t num_add = cms_add_inc_alt(cms, hashes, cms->depth, x);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_remove_inc_float(CountMinSketch* cms, double key, uint32_t x) {
+  uint64_t* hashes = cms_get_hashes_float(cms, key);
+  int32_t num_add = cms_remove_inc_alt(cms, hashes, cms->depth, x);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_check_float(CountMinSketch* cms, double key) {
+  uint64_t* hashes = cms_get_hashes_float(cms, key);
+  int32_t num_add = cms_check_alt(cms, hashes, cms->depth);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_check_mean_float(CountMinSketch* cms, double key) {
+  uint64_t* hashes = cms_get_hashes_float(cms, key);
+  int32_t num_add = cms_check_mean_alt(cms, hashes, cms->depth);
+  free(hashes);
+  return num_add;
+}
+
+int32_t cms_check_mean_min_float(CountMinSketch* cms, double key) {
+  uint64_t* hashes = cms_get_hashes_float(cms, key);
+  int32_t num_add = cms_check_mean_min_alt(cms, hashes, cms->depth);
+  free(hashes);
+  return num_add;
+}
+
+/* Hash function implementations for different data types */
+static uint64_t* __default_hash_int(unsigned int num_hashes, int64_t key) {
+  uint64_t* results = (uint64_t*)calloc(num_hashes, sizeof(uint64_t));
+  int i;
+  for (i = 0; i < num_hashes; ++i) {
+    results[i] = __fnv_1a_int(key, i);
+  }
+  return results;
+}
+
+static uint64_t* __default_hash_float(unsigned int num_hashes, double key) {
+  uint64_t* results = (uint64_t*)calloc(num_hashes, sizeof(uint64_t));
+  int i;
+  for (i = 0; i < num_hashes; ++i) {
+    results[i] = __fnv_1a_float(key, i);
+  }
+  return results;
+}
+
 static uint64_t __fnv_1a(const char* key, int seed) {
   // FNV-1a hash (http://www.isthe.com/chongo/tech/comp/fnv/)
   int i, len = strlen(key);
@@ -437,6 +540,34 @@ static uint64_t __fnv_1a(const char* key, int seed) {
                (31 * seed);  // FNV_OFFSET 64 bit with magic number seed
   for (i = 0; i < len; ++i) {
     h = h ^ (unsigned char)key[i];
+    h = h * 1099511628211ULL;  // FNV_PRIME 64 bit
+  }
+  return h;
+}
+
+static uint64_t __fnv_1a_int(int64_t key, int seed) {
+  // FNV-1a hash for integer keys
+  const unsigned char* bytes = (const unsigned char*)&key;
+  size_t len = sizeof(int64_t);
+  uint64_t h =
+      14695981039346656037ULL + (31 * seed);  // FNV_OFFSET 64 bit with seed
+
+  for (size_t i = 0; i < len; ++i) {
+    h = h ^ bytes[i];
+    h = h * 1099511628211ULL;  // FNV_PRIME 64 bit
+  }
+  return h;
+}
+
+static uint64_t __fnv_1a_float(double key, int seed) {
+  // FNV-1a hash for float/double keys
+  const unsigned char* bytes = (const unsigned char*)&key;
+  size_t len = sizeof(double);
+  uint64_t h =
+      14695981039346656037ULL + (31 * seed);  // FNV_OFFSET 64 bit with seed
+
+  for (size_t i = 0; i < len; ++i) {
+    h = h ^ bytes[i];
     h = h * 1099511628211ULL;  // FNV_PRIME 64 bit
   }
   return h;
