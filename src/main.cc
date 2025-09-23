@@ -1,7 +1,6 @@
 
 #include <iostream>
 
-#include "include/cardinality_estimation/count_min_sketch.h"
 #include "include/cardinality_estimation/predicate.h"
 #include "include/cardinality_estimation/simple_profile.h"
 #include "include/cardinality_estimation/table.h"
@@ -21,11 +20,16 @@ int main(const int argc, const char** argv)
   /**-------------- CONFIG. VALUES --------------*/
   //todo: Add parsing on main loop to read configuration values and avoid the need to recompile the program.
 
+  // !TUG-OF-WAR
   // Number of groups
   constexpr int tow_depth = 5;
   // Number estimators per group.
   // 10240/4/#groups = 10240/4/5 = 512
   constexpr int tow_width = 10240;
+
+  // !COUNT-MIN SKETCH
+  constexpr unsigned int cms_depth = 7;
+  constexpr unsigned int cms_width = 10000;
   /*--------------- END OF CONFIG ---------------*/
 
   const auto config = cardinality_estimation::ParseInputFile
@@ -42,9 +46,11 @@ int main(const int argc, const char** argv)
       cardinality_estimation::RunTugOfWar(config, tow_depth, tow_width);
     } else if (estimator == "simple-profile" || estimator == "sp") {
       cardinality_estimation::RunSimpleProfileEqual(config);
+    } else if (estimator == "count-min-sketch" || estimator == "cms") {
+      cardinality_estimation::RunCountMinSketch(config, cms_depth, cms_width);
     } else {
       std::cout << "Unknown estimator: " << estimator << "\n";
-      std::cout << "Available estimators: tug-of-war, simple-profile\n";
+      std::cout << "Available estimators: tug-of-war, simple-profile, count-min-sketch\n";
       return 1;
     }
     

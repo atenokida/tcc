@@ -17,21 +17,28 @@ void RunSimpleProfileEqual(const struct cardinality_estimation::ExperimentConfig
   // `column_names` hold all attribute names that some statistics
   // will be available for estimations. Those statistics are built uppon
   // calling the constructor of SimpleProfile class.
-  std::vector<std::string> column_names;
-  for (const auto& experiment : config.predicates) {
-    for (const auto& predicate : experiment) {
-      column_names.push_back(predicate.lhs());
-      column_names.push_back(predicate.rhs());
-    }
-  }
+  // std::vector<std::string> column_names;
+  // for (const auto& experiment : config.predicates) {
+  //   for (const auto& predicate : experiment) {
+  //     column_names.push_back(predicate.lhs());
+  //     column_names.push_back(predicate.rhs());
+  //   }
+  // }
 
   auto total_start = std::chrono::high_resolution_clock::now();
 
-  cardinality_estimation::SimpleProfile sp(*config.table.get(), column_names);
+  // cardinality_estimation::SimpleProfile sp(*config.table.get(), column_names);
 
   // Experiments.
   for (const auto& experiment : config.predicates) {
     auto start = std::chrono::high_resolution_clock::now();
+
+    std::vector<std::string> column_names;
+    for (const auto& predicate : experiment) {
+      column_names.push_back(predicate.lhs());
+      column_names.push_back(predicate.rhs());
+    }
+    cardinality_estimation::SimpleProfile sp(*config.table.get(), column_names);
     double estimate;
 
     if (experiment.size() == 1)

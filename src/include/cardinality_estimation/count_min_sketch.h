@@ -13,8 +13,7 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-
-#include <cstddef>  // NULL
+#include <cstddef>  // For NULL
 
 #define COUNT_MIN_SKETCH_VERSION "0.1.8"
 
@@ -259,4 +258,25 @@ uint64_t* cms_get_hashes_float(CountMinSketch* cms, double key);
 }  // extern "C"
 #endif
 
-#endif
+// C++ Interface
+#include <cstddef>  // NULL
+#include <vector>
+
+#include "predicate.h"
+#include "table.h"
+
+CountMinSketch BuildSketch(
+    const unsigned int depth, 
+    const unsigned int width,
+    const cardinality_estimation::Table& table,
+    const std::vector<cardinality_estimation::Predicate>& predicates,
+    const bool col_homogenenous = true);
+
+const double CMSInnerProduct(
+    const cardinality_estimation::Table& table,
+    const std::vector<cardinality_estimation::Predicate>& predicates,
+    const unsigned int depth,
+    const unsigned int width,
+    const bool col_homogeneous = true);
+
+#endif  // BARRUST_SIMPLE_COUNT_MIN_SKETCH_H__

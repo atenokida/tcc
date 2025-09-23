@@ -5,8 +5,11 @@
 ***     License: MIT 2017
 *******************************************************************************/
 
+#include "cardinality_estimation/count_min_sketch.h"
+
 #include <inttypes.h> /* PRIu64 */
 #include <limits.h>
+#include <limits>  // numeric_limits<T>max()
 #include <math.h>
 #include <stdarg.h>
 #include <stdbool.h>
@@ -14,7 +17,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "cardinality_estimation/count_min_sketch.h"
+#include <cstddef>  // NULL
+#include <cstdint>  // uint64_t
+#include <vector>
+
+#include <boost/functional/hash.hpp>  // boost::hash
 
 #define LOG_TWO 0.6931471805599453
 
@@ -632,4 +639,152 @@ static int32_t __safe_add_2(int32_t a, int32_t b) {
   else if (c >= INT32_MAX)
     return INT32_MAX;
   return (int32_t)c;
+}
+
+CountMinSketch BuildSketch(
+    const unsigned int depth, 
+    const unsigned int width,
+    const cardinality_estimation::Table& table,
+    const std::vector<cardinality_estimation::Predicate>& predicates,
+    const bool col_homogenenous)
+{
+  if (col_homogenenous) {
+    CountMinSketch cms;
+    cms_init(&cms, width, depth);
+
+    if (predicates.size() == 1) {
+      // Assuming predicates are column homogeneous and of equality type
+      const auto& column_name = predicates[0].lhs();
+      const auto& column_data = table.get_column(column_name);
+
+      std::visit(
+        [&cms](const auto& arg) {
+          using T = std::decay_t<decltype(arg)>;
+
+          if constexpr (std::is_same_v<T, xt::xarray<std::string>>) {
+            for (const auto& value : arg)
+              cms_add(&cms, value.c_str());
+
+          } else if constexpr (std::is_same_v<T, xt::xarray<int>>) {
+            for (const auto& value : arg)
+              cms_add_int(&cms, value);
+
+          } else if constexpr (std::is_same_v<T, xt::xarray<double>>) {
+            for (const auto& value : arg)
+              cms_add_float(&cms, value);
+
+          } else {
+            throw std::runtime_error("Unsupported column data type for CMS.");
+          }
+        }, 
+      column_data);
+
+    } else { // complex predicate
+      // In this scenario, we will concatenate the values of all 
+      // columns involved in the predicates.
+      // Solution similar to a composite key, same approach used in Tug-of-War.
+
+      // TODO: We can save some memory by removing vector `rows_hashes` if we
+      //       process the table in a row-wise manner instead of column-wise.
+      std::vector<std::vector<uint64_t>> rows_hashes(table.num_rows(), 
+                                                      std::vector<uint64_t>(depth, 0));
+
+      // Compute combined hashes for each row based on all predicate columns.
+      for (const auto& predicate : predicates) {
+        const auto& column_name = predicate.lhs();
+        const auto& column_data = table.get_column(column_name);
+
+        std::visit(
+          [&table, &rows_hashes](const auto& arg) {
+            using T = std::decay_t<decltype(arg)>;
+
+            if constexpr (std::is_same_v<T, xt::xarray<std::string>>) {
+              boost::hash<std::string> string_hash;
+              for (std::size_t row = 0; row < table.num_rows(); ++row)
+                rows_hashes.at(row).push_back(string_hash(arg(row)));
+
+            } else if constexpr (std::is_same_v<T, xt::xarray<int>>) {
+              boost::hash<int> int_hash;
+              for (std::size_t row = 0; row < table.num_rows(); ++row)
+                rows_hashes.at(row).push_back(int_hash(arg(row)));
+
+            } else if constexpr (std::is_same_v<T, xt::xarray<double>>) {
+              boost::hash<double> double_hash;
+              for (std::size_t row = 0; row < table.num_rows(); ++row)
+                rows_hashes.at(row).push_back(double_hash(arg(row)));
+
+            } else {
+              throw std::runtime_error("Unsupported column data type for CMS.");
+            }
+          }, 
+        column_data);
+
+      }
+
+      // Add the combined hashes to the CMS.
+      for (const auto& row_hashes : rows_hashes) {
+        // Combine the individual column hashes into a single hash for the row.
+        std::size_t combined_hash = 0;
+        for (const auto& h : row_hashes)
+          boost::hash_combine(combined_hash, h);
+        
+        cms_add_inc(&cms, std::to_string(combined_hash).c_str(), 1);
+      }
+    }
+
+    return cms;
+  } else {
+    throw std::runtime_error("Column heterogeneous sketching not implemented.");
+  }
+}
+/**------------------------------------------------------------------------
+**                       INNER PRODUCT ESTIMATION
+** Confer Sec. 4.2 from the original paper "The Count-min sketch and 
+** its applications" by Cormode & Muthukrishnan.
+*------------------------------------------------------------------------**/
+// Wrapper function for different types of predicates.
+const double CMSInnerProduct(
+    const cardinality_estimation::Table& table,
+    const std::vector<cardinality_estimation::Predicate>& predicates,
+    const unsigned int depth,
+    const unsigned int width,
+    const bool col_homogeneous)
+{
+  // Currently only column homogeneous supported.
+  for (const auto& predicate : predicates) {
+    if (predicate.lhs() != predicate.rhs()) {
+      std::cout << "[Count-min sketch] Ops..."
+                << "[Count-min sketch] Different attributes on the predicate"
+                << "[Count-min sketch] Support to col. heterogeneous not available yet"
+                << "\n";
+    }
+  }
+
+  CountMinSketch cms = BuildSketch(depth, width, table, predicates, col_homogeneous);
+  double result = -1;
+
+  if (col_homogeneous) {
+    // Calculate the min product of matching rows.
+    // Since we are estimating self-join size,
+    // the matching rows are the same.
+    // So we can just calculate the inner product of each row with itself.
+    // The solution is the same for complex predicate since we concatenate
+    // the attributes appearing in the predicates.
+    float min = std::numeric_limits<float>::max();
+    for (std::size_t i = 0; i < cms.depth; ++i) {
+      float row_inner_prod = 0;
+      uint32_t bin = i * cms.width;
+      for (std::size_t j = 0; j < cms.width; ++j) {
+        row_inner_prod += cms.bins[bin + j] * cms.bins[bin + j];
+      }
+      if (row_inner_prod < min)
+        min = row_inner_prod;
+    }
+
+    result = min;
+  } else {
+    throw std::runtime_error("Column heterogeneous inner product not implemented.");
+  }
+
+  return result;
 }
