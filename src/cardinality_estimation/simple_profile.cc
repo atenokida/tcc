@@ -19,7 +19,7 @@
 #include <vector>
 
 #include "cardinality_estimation/table.h"
-#include "xtensor.hpp"
+#include "xtensor.hpp" // REFACTOR THIS: fix imports following google style guide
 
 namespace cardinality_estimation {
 

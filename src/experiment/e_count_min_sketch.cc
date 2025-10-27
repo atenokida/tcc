@@ -2,6 +2,7 @@
 
 #include <algorithm>  // std::all_of
 #include <chrono>   // high_resolution_clock, duration
+#include <cstddef>  // size_t
 #include <fstream>  // ofstream
 
 namespace cardinality_estimation {
@@ -10,7 +11,8 @@ void RunCountMinSketch(
     const struct cardinality_estimation::ExperimentConfig& config,
     const unsigned int depth,
     const unsigned int width,
-    const std::string& output_file) 
+    std::size_t num_runs,
+    const std::string& output_file)
 {
   std::ofstream ofs(output_file, std::ios::app);
   if (!ofs.is_open()) {
@@ -22,40 +24,51 @@ void RunCountMinSketch(
 
   // Experiments.
   for (const auto& experiment : config.predicates) {
-    
-    bool col_homogeneous = false;
-    // Check if all predicates are column homogeneous.
-    if (std::all_of(experiment.begin(), experiment.end(),
-    [](const Predicate& p) { return p.lhs() == p.rhs(); })) {
-      col_homogeneous = true;
+    for (size_t i = 0; i < num_runs; ++i) {
+      // To account for variability, run the experiment multiple times.
+          
+      bool col_homogeneous = false;
+      // Check if all predicates are column homogeneous.
+      if (std::all_of(experiment.begin(), experiment.end(),
+        [](const Predicate& p) { return p.lhs() == p.rhs(); })) {
+          col_homogeneous = true;
+      }
+
+      auto start = std::chrono::high_resolution_clock::now();
+      double estimate;
+      std::chrono::duration<double, std::milli> build_time;
+      std::chrono::duration<double, std::milli> estimation_time;
+
+      estimate = CMSInnerProduct(*config.table.get(),
+                                experiment, depth, width,
+                                build_time, estimation_time,
+                                col_homogeneous);
+
+      auto end = std::chrono::high_resolution_clock::now();
+      std::chrono::duration<double, std::milli> elapsed = end - start;
+      
+      // debug
+      // cardinality_estimation::PrintExpression(experiment);
+      // std::cout << "Estimate = " << estimate
+      //           << "\nTime = " << elapsed.count() << " ms" << "\n"
+      //           << "-------------------------------------------\n";
+
+      ofs << "COUNT-MIN-SKETCH,"
+          << cardinality_estimation::ExpressionToString(experiment) << ","
+          << config.table->num_rows() << ","
+          << estimate << ","
+          << build_time.count() << ","
+          << estimation_time.count() << "\n";
     }
 
-    auto start = std::chrono::high_resolution_clock::now();
-    double estimate;
-
-    estimate = CMSInnerProduct(*config.table.get(), experiment, depth, width, col_homogeneous);
-
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> elapsed = end - start;
-    
-    cardinality_estimation::PrintExpression(experiment);
-
-    std::cout << "Estimate = " << estimate
-              << "\nTime = " << elapsed.count() << " ms" << "\n"
-              << "-------------------------------------------\n";
-
-    ofs << "COUNT-MIN-SKETCH,"
-        << cardinality_estimation::ExpressionToString(experiment) << ","
-        << config.table->num_rows() << ","
-        << estimate << ","
-        << elapsed.count() << "\n";
   }
 
   auto total_end = std::chrono::high_resolution_clock::now();
   std::chrono::duration<double, std::milli> total_time = total_end - total_start;
   std::cout << "Total execution time: " << total_time.count() << " ms" << "\n";
 
-  ofs << "COUNT-MIN-SKETCH,TOTAL,,," << total_time.count() << "\n";
+  ofs << "COUNT-MIN-SKETCH,TOTAL," << config.table_name << ",,,"
+      << total_time.count() << "\n\n";
 
   ofs.close();
 }

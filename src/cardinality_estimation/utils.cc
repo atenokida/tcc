@@ -1,7 +1,7 @@
 #include "cardinality_estimation/utils.h"
 
 #include <iostream>
-#include <fstream>  // ifstream
+#include <fstream>  // ifstream, ofstream
 #include <memory>  // unique_ptr, make_unique
 #include <sstream>  // istringstream
 #include <stdexcept>  // invalid_argument
@@ -32,6 +32,7 @@ struct ExperimentConfig ParseInputFile(const std::string& filename)
       auto table = std::make_unique<Table>();
       table->load_csv("../../data/" + str_line);
       config.table = std::move(table);
+      config.table_name = str_line;
       table_read = true;
 
     } else [[likely]] {

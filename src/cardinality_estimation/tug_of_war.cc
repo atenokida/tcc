@@ -8,6 +8,7 @@
 #include "cardinality_estimation/tug_of_war.h"
 
 #include <algorithm>  // sort
+#include <chrono>  // high_resolution_clock, duration
 #include <cstring>  // memset
 #include <functional>  // hash
 #include <iterator>  // ostream_iterator
@@ -16,9 +17,10 @@
 #include <type_traits>  // is_same
 #include <vector>  // vector
 
+// REFACTOR THIS: fix imports following google style guide
 #include <boost/functional/hash.hpp>  // boost::hash
-
 #include "MurmurHash.h"
+
 #include "cardinality_estimation/vec_hash.h" // template specialization for hash<vec<size_t>>
 
 namespace cardinality_estimation {
@@ -41,7 +43,9 @@ TugOfWar::TugOfWar(const unsigned int depth,
 
 const double TugOfWar::EstimateEquality(
   const Table& table, 
-  const Predicate& predicate)
+  const Predicate& predicate,
+  std::chrono::duration<double, std::milli>& build_time,
+  std::chrono::duration<double, std::milli>& estimation_time)
 {
   if (predicate.lhs() != predicate.rhs()) {
     std::cout << "WARNING: Tug-of-War only supports " 
@@ -57,6 +61,8 @@ const double TugOfWar::EstimateEquality(
     throw std::runtime_error("Column not found: " + column_name);
 
   const auto& column_data = table.get_column(column_name);
+
+  auto build_start = std::chrono::high_resolution_clock::now();
 
   // Build the sketch.
   std::visit(
@@ -74,22 +80,36 @@ const double TugOfWar::EstimateEquality(
 
     }, 
     column_data);
+
+  auto build_end = std::chrono::high_resolution_clock::now();
+  build_time = build_end - build_start;
   
+  auto estimation_start = std::chrono::high_resolution_clock::now();
+
   // Estimate
-  return F2Est(*this);
+  const double estimate = F2Est(*this);
+
+  auto estimation_end = std::chrono::high_resolution_clock::now();
+  estimation_time = estimation_end - estimation_start;
+
+  return estimate;
 }
 
 // TODO: We can save some memory by removing vector `rows_hashes` if we
 //       process the table in a row-wise manner instead of column-wise.
 const double TugOfWar::EstimateEquality(
   const Table& table, 
-  const std::vector<Predicate>& predicates)
+  const std::vector<Predicate>& predicates,
+  std::chrono::duration<double, std::milli>& build_time,
+  std::chrono::duration<double, std::milli>& estimation_time)
 {
   // We hash all attributes on the predicates for each row.
   // Each internal vector holds the hash codes of each attribute
   // appearing on the predicate for a specific row.
   std::vector<std::vector<std::size_t>> rows_hashes;
   rows_hashes.resize(table.num_rows());
+
+  auto build_start = std::chrono::high_resolution_clock::now();
 
   for (const auto& predicate: predicates) {
     if (predicate.lhs() != predicate.rhs()) {
@@ -106,17 +126,20 @@ const double TugOfWar::EstimateEquality(
         using T = std::decay_t<decltype(arg)>;
 
         if constexpr(std::is_same_v<T, xt::xarray<double>>) {
-          std::hash<double> double_hash;
+          // std::hash<double> double_hash;
+          boost::hash<double> double_hash;
           for (std::size_t i = 0; i < table.num_rows(); ++i)
             rows_hashes.at(i).push_back(double_hash(arg(i)));
 
         } else if constexpr(std::is_same_v<T, xt::xarray<int>>) {
-          std::hash<int> int_hash;
+          // std::hash<int> int_hash;
+          boost::hash<int> int_hash;
           for (std::size_t i = 0; i < table.num_rows(); ++i)
             rows_hashes.at(i).push_back(int_hash(arg(i)));
 
         } else if constexpr(std::is_same_v<T, xt::xarray<std::string>>) {
-          std::hash<std::string> str_hash;
+          // std::hash<std::string> str_hash;
+          boost::hash<std::string> str_hash;
           for (std::size_t i = 0; i < table.num_rows(); ++i)
             rows_hashes.at(i).push_back(str_hash(arg(i)));
         }
@@ -128,13 +151,23 @@ const double TugOfWar::EstimateEquality(
     for (const auto& tuple : rows_hashes) {
       const std::size_t tuple_hash_code = tuple_hasher(tuple);
       
-      Update(&tuple_hash_code);
+      // Update(&tuple_hash_code);
+      Update(static_cast<const void*>(&tuple_hash_code));
     }
-
   }
 
+  auto build_end = std::chrono::high_resolution_clock::now();
+  build_time = build_end - build_start;
+
+  auto estimation_start = std::chrono::high_resolution_clock::now();
+
   // Estimate
-  return F2Est(*this);
+  const double estimate = F2Est(*this);
+
+  auto estimation_end = std::chrono::high_resolution_clock::now();
+  estimation_time = estimation_end - estimation_start;
+  
+  return estimate;
 }
 
 // This is an adaptation of the `Insert()`
