@@ -1,20 +1,170 @@
-TUG-OF-WAR,age = age,10000,2.52871e+06,329.308
-TUG-OF-WAR,age = age AND department = department,10000,8.70772e+06,655.030
-TUG-OF-WAR,department = department,10000,1.08078e+08,308.299
-TUG-OF-WAR,TOTAL,,,1292.796
-TUG-OF-WAR,age = age,100000,2.53142e+08,3242.516
-TUG-OF-WAR,age = age AND department = department,100000,8.76331e+08,6502.874
-TUG-OF-WAR,department = department,100000,1.08076e+10,3037.720
-TUG-OF-WAR,TOTAL,,,12783.300
-TUG-OF-WAR,age = age,500000,6.32641e+09,16113.940
-TUG-OF-WAR,age = age AND department = department,500000,2.18475e+10,32448.560
-TUG-OF-WAR,department = department,500000,2.70171e+11,15138.060
-TUG-OF-WAR,TOTAL,,,63700.740
-TUG-OF-WAR,age = age,1000000,2.53007e+10,32213.125
-TUG-OF-WAR,age = age AND department = department,1000000,8.72911e+10,64924.775
-TUG-OF-WAR,department = department,1000000,1.08063e+12,30441.650
-TUG-OF-WAR,TOTAL,,,127579.750
-TUG-OF-WAR,age = age,2000000,1.01174e+11,64451.700
-TUG-OF-WAR,age = age AND department = department,2000000,3.48895e+11,129763.600
-TUG-OF-WAR,department = department,2000000,4.32225e+12,60581.980
-TUG-OF-WAR,TOTAL,,,254797.600
+TUG-OF-WAR,age = age,2000000,1.01174e+11,65986.3,0.0485
+TUG-OF-WAR,age = age,2000000,4.04698e+11,65748.9,0.0463
+TUG-OF-WAR,age = age,2000000,9.1057e+11,65935.4,0.0475
+TUG-OF-WAR,age = age,2000000,1.61879e+12,66048.2,0.0467
+TUG-OF-WAR,age = age,2000000,2.52936e+12,65764.6,0.0471
+TUG-OF-WAR,age = age AND department = department,2000000,2.91692e+12,132385,0.0478
+TUG-OF-WAR,age = age AND department = department,2000000,3.61169e+12,132422,0.0464
+TUG-OF-WAR,age = age AND department = department,2000000,4.87712e+12,132487,0.0767
+TUG-OF-WAR,age = age AND department = department,2000000,6.58068e+12,132679,0.0468
+TUG-OF-WAR,age = age AND department = department,2000000,8.72237e+12,132360,0.0473
+TUG-OF-WAR,department = department,2000000,1.28025e+13,61961.3,0.0769
+TUG-OF-WAR,department = department,2000000,2.46159e+13,61942.5,0.0483
+TUG-OF-WAR,department = department,2000000,4.44294e+13,62004.7,0.0452
+TUG-OF-WAR,department = department,2000000,7.22429e+13,61863,0.0464
+TUG-OF-WAR,department = department,2000000,1.08056e+14,61955.2,0.0476
+TUG-OF-WAR,TOTAL,gen0_2000000.csv,,,1.30219e+06
+
+TUG-OF-WAR,age = age,1000000,2.53007e+10,32795,0.0466
+TUG-OF-WAR,age = age,1000000,1.01203e+11,32752.9,0.0473
+TUG-OF-WAR,age = age,1000000,2.27706e+11,32762.1,0.0471
+TUG-OF-WAR,age = age,1000000,4.04812e+11,32714.4,0.0482
+TUG-OF-WAR,age = age,1000000,6.32518e+11,32725.5,0.0456
+TUG-OF-WAR,age = age AND department = department,1000000,7.2943e+11,65906.2,0.0477
+TUG-OF-WAR,age = age AND department = department,1000000,9.03873e+11,65892.6,0.0465
+TUG-OF-WAR,age = age AND department = department,1000000,1.2204e+12,65900.2,0.0477
+TUG-OF-WAR,age = age AND department = department,1000000,1.64654e+12,65860.6,0.0463
+TUG-OF-WAR,age = age AND department = department,1000000,2.18228e+12,65834.6,0.0475
+TUG-OF-WAR,department = department,1000000,3.20092e+12,30623.8,0.0496
+TUG-OF-WAR,department = department,1000000,6.15462e+12,30656.3,0.0467
+TUG-OF-WAR,department = department,1000000,1.11083e+13,30594.2,0.047
+TUG-OF-WAR,department = department,1000000,1.8062e+13,30637.9,0.0479
+TUG-OF-WAR,department = department,1000000,2.70157e+13,30754.2,0.0476
+TUG-OF-WAR,TOTAL,gen0_1000000.csv,,,646731
+
+TUG-OF-WAR,age = age,500000,6.32641e+09,16415.5,0.0473
+TUG-OF-WAR,age = age,500000,2.53057e+10,16360.2,0.0486
+TUG-OF-WAR,age = age,500000,5.69377e+10,16374,0.1058
+TUG-OF-WAR,age = age,500000,1.01223e+11,16365.2,0.0467
+TUG-OF-WAR,age = age,500000,1.5816e+11,16376.4,0.0476
+TUG-OF-WAR,age = age AND department = department,500000,1.82459e+11,32946.3,0.0475
+TUG-OF-WAR,age = age AND department = department,500000,2.2621e+11,32941.2,0.0469
+TUG-OF-WAR,age = age AND department = department,500000,3.05437e+11,32925.6,0.047
+TUG-OF-WAR,age = age AND department = department,500000,4.12097e+11,32950.3,0.046
+TUG-OF-WAR,age = age AND department = department,500000,5.46188e+11,33063.5,0.0477
+TUG-OF-WAR,department = department,500000,8.00373e+11,15158.5,0.045
+TUG-OF-WAR,department = department,500000,1.53885e+12,15184.4,0.0472
+TUG-OF-WAR,department = department,500000,2.77732e+12,15219,0.0483
+TUG-OF-WAR,department = department,500000,4.5158e+12,15199.1,0.0485
+TUG-OF-WAR,department = department,500000,6.75427e+12,15234.2,0.0469
+TUG-OF-WAR,TOTAL,gen0_500000.csv,,,322877
+
+TUG-OF-WAR,age = age,100000,2.53142e+08,3359.24,0.0463
+TUG-OF-WAR,age = age,100000,1.01257e+09,3299.16,0.0486
+TUG-OF-WAR,age = age,100000,2.27828e+09,3310.73,0.0471
+TUG-OF-WAR,age = age,100000,4.05028e+09,3289.56,0.0469
+TUG-OF-WAR,age = age,100000,6.32856e+09,3296.18,0.0471
+TUG-OF-WAR,age = age AND department = department,100000,7.31296e+09,6626.8,0.0459
+TUG-OF-WAR,age = age AND department = department,100000,9.07983e+09,6618.31,0.047301
+TUG-OF-WAR,age = age AND department = department,100000,1.22583e+10,6615.6,0.0462
+TUG-OF-WAR,age = age AND department = department,100000,1.65344e+10,6616.77,0.0477
+TUG-OF-WAR,age = age AND department = department,100000,2.19083e+10,6614.11,0.0464
+TUG-OF-WAR,department = department,100000,3.20436e+10,3063.61,0.0453
+TUG-OF-WAR,department = department,100000,6.15803e+10,3060.48,0.0464
+TUG-OF-WAR,department = department,100000,1.11117e+11,3064.5,0.0468
+TUG-OF-WAR,department = department,100000,1.80654e+11,3048.62,0.0463
+TUG-OF-WAR,department = department,100000,2.7019e+11,3069.06,0.046
+TUG-OF-WAR,TOTAL,gen0_100000.csv,,,64985.8
+
+TUG-OF-WAR,age = age,10000,2.52871e+06,337.482,0.0483
+TUG-OF-WAR,age = age,10000,1.01148e+07,343.742,0.0494
+TUG-OF-WAR,age = age,10000,2.27584e+07,339.473,0.0491
+TUG-OF-WAR,age = age,10000,4.04593e+07,336.345,0.0488
+TUG-OF-WAR,age = age,10000,6.32177e+07,330.417,0.046
+TUG-OF-WAR,age = age AND department = department,10000,7.25105e+07,660.131,0.0464
+TUG-OF-WAR,age = age AND department = department,10000,9.04096e+07,663.499,0.045
+TUG-OF-WAR,age = age AND department = department,10000,1.21927e+08,658.488,0.0474
+TUG-OF-WAR,age = age AND department = department,10000,1.64355e+08,659.558,0.0469
+TUG-OF-WAR,age = age AND department = department,10000,2.17693e+08,668.2,0.0471
+TUG-OF-WAR,department = department,10000,3.21563e+08,311.701,0.0462
+TUG-OF-WAR,department = department,10000,6.16662e+08,309.285,0.0463
+TUG-OF-WAR,department = department,10000,1.11176e+09,309.027,0.0467
+TUG-OF-WAR,department = department,10000,1.80686e+09,310.368,0.0479
+TUG-OF-WAR,department = department,10000,2.70196e+09,308.196,0.0596
+TUG-OF-WAR,TOTAL,gen0_10000.csv,,,6550.14
+
+TUG-OF-WAR,age = age,10000,2.2313e+06,335.754,0.0471
+TUG-OF-WAR,age = age,10000,8.92522e+06,335.43,0.0481
+TUG-OF-WAR,age = age,10000,2.00817e+07,334.557,0.0482
+TUG-OF-WAR,age = age,10000,3.57009e+07,329.156,0.0473
+TUG-OF-WAR,age = age,10000,5.57826e+07,340.026,0.0495
+TUG-OF-WAR,department = department,10000,1.55164e+08,316.854,0.0478
+TUG-OF-WAR,department = department,10000,4.54545e+08,313.461,0.0462
+TUG-OF-WAR,department = department,10000,9.54535e+08,315.692,0.0479
+TUG-OF-WAR,department = department,10000,1.65581e+09,313.755,0.0471
+TUG-OF-WAR,department = department,10000,2.55708e+09,313.054,0.0464
+TUG-OF-WAR,age = age AND department = department,10000,2.56563e+09,665.629,0.0476
+TUG-OF-WAR,age = age AND department = department,10000,2.58291e+09,664.431,0.0471
+TUG-OF-WAR,age = age AND department = department,10000,2.60892e+09,664.213,0.0466
+TUG-OF-WAR,age = age AND department = department,10000,2.64367e+09,667.881,0.048
+TUG-OF-WAR,age = age AND department = department,10000,2.68715e+09,660.311,0.075
+TUG-OF-WAR,TOTAL,gen1_10000.csv,,,6574.65
+TUG-OF-WAR,age = age,100000,2.21547e+08,3274.46,0.0494
+
+TUG-OF-WAR,age = age,100000,8.86188e+08,3300.02,0.0596
+TUG-OF-WAR,age = age,100000,1.99392e+09,3332.16,0.0495
+TUG-OF-WAR,age = age,100000,3.54475e+09,3351.1,0.0501
+TUG-OF-WAR,age = age,100000,5.53867e+09,3305.47,0.0484
+TUG-OF-WAR,department = department,100000,1.54786e+10,3018.89,0.0469
+TUG-OF-WAR,department = department,100000,4.54185e+10,3063.06,0.0487
+TUG-OF-WAR,department = department,100000,9.5595e+10,3067.44,0.0462
+TUG-OF-WAR,department = department,100000,1.65772e+11,2999.13,0.0456
+TUG-OF-WAR,department = department,100000,2.55949e+11,3017.59,0.0463
+TUG-OF-WAR,age = age AND department = department,100000,2.56818e+11,6476.87,0.0467
+TUG-OF-WAR,age = age AND department = department,100000,2.58563e+11,6473.12,0.0475
+TUG-OF-WAR,age = age AND department = department,100000,2.61182e+11,6495.68,0.0462
+TUG-OF-WAR,age = age AND department = department,100000,2.64677e+11,6493.3,0.0491
+TUG-OF-WAR,age = age AND department = department,100000,2.69046e+11,6467.72,0.046
+TUG-OF-WAR,TOTAL,gen1_100000.csv,,,64169.4
+
+TUG-OF-WAR,age = age,500000,5.53534e+09,16170.4,0.0476
+TUG-OF-WAR,age = age,500000,2.21414e+10,16080.2,0.0475
+TUG-OF-WAR,age = age,500000,4.98181e+10,16070.3,0.0473
+TUG-OF-WAR,age = age,500000,8.85655e+10,16077.7,0.0476
+TUG-OF-WAR,age = age,500000,1.38384e+11,16086.9,0.0476
+TUG-OF-WAR,department = department,500000,3.86993e+11,15012.3,0.0479
+TUG-OF-WAR,department = department,500000,1.13607e+12,14962,0.048
+TUG-OF-WAR,department = department,500000,2.39074e+12,15002.2,0.0465
+TUG-OF-WAR,department = department,500000,4.14542e+12,15048.6,0.0462
+TUG-OF-WAR,department = department,500000,6.40009e+12,14981.3,0.0473
+TUG-OF-WAR,age = age AND department = department,500000,6.42176e+12,32355.7,0.0472
+TUG-OF-WAR,age = age AND department = department,500000,6.46532e+12,32379.6,0.0482
+TUG-OF-WAR,age = age AND department = department,500000,6.53077e+12,32789.4,0.0471
+TUG-OF-WAR,age = age AND department = department,500000,6.61812e+12,32354.2,0.0465
+TUG-OF-WAR,age = age AND department = department,500000,6.72735e+12,32383.7,0.0471
+TUG-OF-WAR,TOTAL,gen1_500000.csv,,,317915
+
+TUG-OF-WAR,age = age,1000000,2.21376e+10,32219.7,0.0462
+TUG-OF-WAR,age = age,1000000,8.85505e+10,32134.7,0.0466
+TUG-OF-WAR,age = age,1000000,1.99239e+11,32134.5,0.0465
+TUG-OF-WAR,age = age,1000000,3.54202e+11,32121.9,0.048
+TUG-OF-WAR,age = age,1000000,5.53441e+11,32174,0.0476
+TUG-OF-WAR,department = department,1000000,1.54826e+12,30282.6,0.0479
+TUG-OF-WAR,department = department,1000000,4.54307e+12,30329.3,0.0485
+TUG-OF-WAR,department = department,1000000,9.56108e+12,30289.2,0.0467
+TUG-OF-WAR,department = department,1000000,1.65791e+13,30230.4,0.0469
+TUG-OF-WAR,department = department,1000000,2.55972e+13,30265.4,0.0463
+TUG-OF-WAR,age = age AND department = department,1000000,2.5684e+13,64800.3,0.0476
+TUG-OF-WAR,age = age AND department = department,1000000,2.58583e+13,64775.8,0.0472
+TUG-OF-WAR,age = age AND department = department,1000000,2.61202e+13,64817,0.0479
+TUG-OF-WAR,age = age AND department = department,1000000,2.64695e+13,64775.3,0.047
+TUG-OF-WAR,age = age AND department = department,1000000,2.69064e+13,64809.4,0.0479
+TUG-OF-WAR,TOTAL,gen1_1000000.csv,,,636483
+
+TUG-OF-WAR,age = age,2000000,8.85011e+10,64345.5,0.0464
+TUG-OF-WAR,age = age,2000000,3.54004e+11,64261.9,0.0478
+TUG-OF-WAR,age = age,2000000,7.9651e+11,64266.4,0.0464
+TUG-OF-WAR,age = age,2000000,1.41602e+12,64297.8,0.0462
+TUG-OF-WAR,age = age,2000000,2.21253e+12,64254.6,0.0464
+TUG-OF-WAR,department = department,2000000,6.19068e+12,61707.7,0.0463
+TUG-OF-WAR,department = department,2000000,1.8172e+13,61753.2,0.049
+TUG-OF-WAR,department = department,2000000,3.82444e+13,61699.5,0.0593
+TUG-OF-WAR,department = department,2000000,6.63168e+13,60825,0.0609
+TUG-OF-WAR,department = department,2000000,1.02389e+14,60277.8,0.0463
+TUG-OF-WAR,age = age AND department = department,2000000,1.02735e+14,129601,0.0465
+TUG-OF-WAR,age = age AND department = department,2000000,1.03431e+14,129607,0.0474
+TUG-OF-WAR,age = age AND department = department,2000000,1.04477e+14,129550,0.0473
+TUG-OF-WAR,age = age AND department = department,2000000,1.05873e+14,129503,0.0462
+TUG-OF-WAR,age = age AND department = department,2000000,1.07619e+14,129560,0.0475
+TUG-OF-WAR,TOTAL,gen1_2000000.csv,,,1.27615e+06
+

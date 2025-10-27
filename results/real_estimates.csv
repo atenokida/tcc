@@ -1,31 +1,55 @@
-,dataset,experiment,predicate,parsed_predicate,predicate_line,table_size,real_size
-gen0_100k_1,gen0_100000.csv,gen0_100k,age = age,t1.age = t2.age,1,100000,249625474
-gen0_100k_2,gen0_100000.csv,gen0_100k,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,2,100000,71751740
-gen0_100k_3,gen0_100000.csv,gen0_100k,department = department,t1.department = t2.department,3,100000,2870778424
-gen0_10k_1,gen0_10000.csv,gen0_10k,age = age,t1.age = t2.age,1,10000,2502076
-gen0_10k_2,gen0_10000.csv,gen0_10k,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,2,10000,725032
-gen0_10k_3,gen0_10000.csv,gen0_10k,department = department,t1.department = t2.department,3,10000,28736200
-gen0_1m_1,gen0_1000000.csv,gen0_1m,age = age,t1.age = t2.age,1,1000000,24923622308
-gen0_1m_2,gen0_1000000.csv,gen0_1m,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,2,1000000,7160590728
-gen0_1m_3,gen0_1000000.csv,gen0_1m,department = department,t1.department = t2.department,3,1000000,287272935954
-gen0_2m_1,gen0_2000000.csv,gen0_2m,age = age,t1.age = t2.age,1,2000000,99614282778
-gen0_2m_2,gen0_2000000.csv,gen0_2m,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,2,2000000,28624120854
-gen0_2m_3,gen0_2000000.csv,gen0_2m,department = department,t1.department = t2.department,3,2000000,1149218000494
-gen0_500k_1,gen0_500000.csv,gen0_500k,age = age,t1.age = t2.age,1,500000,6236268946
-gen0_500k_2,gen0_500000.csv,gen0_500k,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,2,500000,1789907756
-gen0_500k_3,gen0_500000.csv,gen0_500k,department = department,t1.department = t2.department,3,500000,71758439412
-gen1_100k_1,gen1_100000.csv,gen1_100k,age = age,t1.age = t2.age,1,100000,208411568
-gen1_100k_2,gen1_100000.csv,gen1_100k,department = department,t1.department = t2.department,2,100000,2885042774
-gen1_100k_3,gen1_100000.csv,gen1_100k,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,3,100000,60186506
-gen1_10k_1,gen1_10000.csv,gen1_10k,age = age,t1.age = t2.age,1,10000,2092032
-gen1_10k_2,gen1_10000.csv,gen1_10k,department = department,t1.department = t2.department,2,10000,28691466
-gen1_10k_3,gen1_10000.csv,gen1_10k,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,3,10000,606336
-gen1_1m_1,gen1_1000000.csv,gen1_1m,age = age,t1.age = t2.age,1,1000000,20834566702
-gen1_1m_2,gen1_1000000.csv,gen1_1m,department = department,t1.department = t2.department,2,1000000,287432686098
-gen1_1m_3,gen1_1000000.csv,gen1_1m,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,3,1000000,5989154714
-gen1_2m_1,gen1_2000000.csv,gen1_2m,age = age,t1.age = t2.age,1,2000000,83336386598
-gen1_2m_2,gen1_2000000.csv,gen1_2m,department = department,t1.department = t2.department,2,2000000,1149544976322
-gen1_2m_3,gen1_2000000.csv,gen1_2m,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,3,2000000,23951141356
-gen1_500k_1,gen1_500000.csv,gen1_500k,age = age,t1.age = t2.age,1,500000,5208888278
-gen1_500k_2,gen1_500000.csv,gen1_500k,department = department,t1.department = t2.department,2,500000,71826244360
-gen1_500k_3,gen1_500000.csv,gen1_500k,age = age AND department = department,t1.age = t2.age AND t1.department = t2.department,3,500000,1496883222
+experiment_fname,dataset_fname,predicate,real_estimate
+flights,flights_1000000.csv,Origin = Origin,13525562981
+flights,flights_1000000.csv,Origin = Origin AND Destination = Destination,1316309219
+flights_100k,flights_100000.csv,Origin = Origin,134673200
+flights_100k,flights_100000.csv,Origin = Origin AND Destination = Destination,13260402
+flights_10k,flights_10000.csv,Origin = Origin,1337610
+flights_10k,flights_10000.csv,Origin = Origin AND Destination = Destination,140538
+flights_500k,flights_500000.csv,Origin = Origin,3377643328
+flights_500k,flights_500000.csv,Origin = Origin AND Destination = Destination,329246758
+gen0_100k,gen0_100000.csv,age = age,249625474
+gen0_100k,gen0_100000.csv,age = age AND department = department,71751740
+gen0_100k,gen0_100000.csv,department = department,2870778424
+gen0_10k,gen0_10000.csv,age = age,2502076
+gen0_10k,gen0_10000.csv,age = age AND department = department,725032
+gen0_10k,gen0_10000.csv,department = department,28736200
+gen0_1m,gen0_1000000.csv,age = age,24923622308
+gen0_1m,gen0_1000000.csv,age = age AND department = department,7160590728
+gen0_1m,gen0_1000000.csv,department = department,287272935954
+gen0_2m,gen0_2000000.csv,age = age,99614282778
+gen0_2m,gen0_2000000.csv,age = age AND department = department,28624120854
+gen0_2m,gen0_2000000.csv,department = department,1149218000494
+gen0_500k,gen0_500000.csv,age = age,6236268946
+gen0_500k,gen0_500000.csv,age = age AND department = department,1789907756
+gen0_500k,gen0_500000.csv,department = department,71758439412
+gen1_100k,gen1_100000.csv,age = age,208411568
+gen1_100k,gen1_100000.csv,department = department,2885042774
+gen1_100k,gen1_100000.csv,age = age AND department = department,60186506
+gen1_10k,gen1_10000.csv,age = age,2092032
+gen1_10k,gen1_10000.csv,department = department,28691466
+gen1_10k,gen1_10000.csv,age = age AND department = department,606336
+gen1_1m,gen1_1000000.csv,age = age,20834566702
+gen1_1m,gen1_1000000.csv,department = department,287432686098
+gen1_1m,gen1_1000000.csv,age = age AND department = department,5989154714
+gen1_2m,gen1_2000000.csv,age = age,83336386598
+gen1_2m,gen1_2000000.csv,department = department,1149544976322
+gen1_2m,gen1_2000000.csv,age = age AND department = department,23951141356
+gen1_500k,gen1_500000.csv,age = age,5208888278
+gen1_500k,gen1_500000.csv,department = department,71826244360
+gen1_500k,gen1_500000.csv,age = age AND department = department,1496883222
+imdb_title,titlekind_1000000.csv,title = title AND prodyear = prodyear,18773295
+imdb_title,titlekind_1000000.csv,prodyear = prodyear,39212490933
+imdb_title_100k,titlekind_100000.csv,title = title AND prodyear = prodyear,282428
+imdb_title_100k,titlekind_100000.csv,prodyear = prodyear,396026764
+imdb_title_10k,titlekind_10000.csv,title = title AND prodyear = prodyear,11950
+imdb_title_10k,titlekind_10000.csv,prodyear = prodyear,4031098
+imdb_title_500k,titlekind_500000.csv,title = title AND prodyear = prodyear,4964537
+imdb_title_500k,titlekind_500000.csv,prodyear = prodyear,9812663438
+tax,tax_1000000.csv,AreaCode = AreaCode AND Phone = Phone,999999
+tax,tax_1000000.csv,State = State AND HasChild = HasChild,9616497253
+tax_100k,tax_100000.csv,AreaCode = AreaCode AND Phone = Phone,100000
+tax_100k,tax_100000.csv,State = State AND HasChild = HasChild,96244618
+tax_10k,tax_10000.csv,AreaCode = AreaCode AND Phone = Phone,10000
+tax_10k,tax_10000.csv,State = State AND HasChild = HasChild,970784
+tax_500k,tax_500000.csv,AreaCode = AreaCode AND Phone = Phone,500000
+tax_500k,tax_500000.csv,State = State AND HasChild = HasChild,2404381172

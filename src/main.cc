@@ -30,8 +30,8 @@ int main(const int argc, const char** argv)
   constexpr int kToWWidth = 10240;
 
   // !COUNT-MIN SKETCH
-  constexpr unsigned int kCMSDepth = 7;
-  constexpr unsigned int kCMSWidth = 10000;
+  constexpr unsigned int kCMSDepth = 24;
+  constexpr unsigned int kCMSWidth = 5000;
   /*--------------- END OF CONFIG ---------------*/
 
   const auto config = cardinality_estimation::ParseInputFile
