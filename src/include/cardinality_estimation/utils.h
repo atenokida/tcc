@@ -15,6 +15,7 @@ namespace cardinality_estimation {
 struct ExperimentConfig {
   std::unique_ptr<Table> table;
   std::vector<std::vector<Predicate>> predicates;
+  std::string table_name;
 };
 
 // Parse input file for experiment.
@@ -24,7 +25,7 @@ struct ExperimentConfig {
 // Subsequent lines should contain predicates.
 extern struct ExperimentConfig ParseInputFile(const std::string& filename);
 
-// Prints a `JOIN` condition.
+// Prints a `JOIN` clause.
 // If `predicates` size is greater than one, predicates will be printed
 // as a conjunction.
 extern void PrintExpression(const std::vector<Predicate>& predicates);
