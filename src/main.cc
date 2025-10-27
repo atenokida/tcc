@@ -19,17 +19,19 @@ int main(const int argc, const char** argv)
 
   /**-------------- CONFIG. VALUES --------------*/
   //todo: Add parsing on main loop to read configuration values and avoid the need to recompile the program.
+  // !EXPERIMENT RUNNING OPTIONS
+  constexpr std::size_t kNumRuns = 5; // Number of times each estimator is run.
 
   // !TUG-OF-WAR
   // Number of groups
-  constexpr int tow_depth = 5;
+  constexpr int kToWDepth = 5;
   // Number estimators per group.
   // 10240/4/#groups = 10240/4/5 = 512
-  constexpr int tow_width = 10240;
+  constexpr int kToWWidth = 10240;
 
   // !COUNT-MIN SKETCH
-  constexpr unsigned int cms_depth = 7;
-  constexpr unsigned int cms_width = 10000;
+  constexpr unsigned int kCMSDepth = 7;
+  constexpr unsigned int kCMSWidth = 10000;
   /*--------------- END OF CONFIG ---------------*/
 
   const auto config = cardinality_estimation::ParseInputFile
@@ -37,17 +39,20 @@ int main(const int argc, const char** argv)
 
   cardinality_estimation::ShowConfig(config);
 
+  // For every algorithm specified in the command line, run the experiments.
   for (size_t i = 2; i < argc; ++i) {
     //todo: Add support for other operators (non-equality and inequalities).
 
     const std::string estimator = argv[i];
 
+    std::cout << "Running estimator: " << estimator << "\n";
+  
     if (estimator == "tug-of-war" || estimator == "tow") {
-      cardinality_estimation::RunTugOfWar(config, tow_depth, tow_width);
+      cardinality_estimation::RunTugOfWar(config, kToWDepth, kToWWidth, kNumRuns);
     } else if (estimator == "simple-profile" || estimator == "sp") {
-      cardinality_estimation::RunSimpleProfileEqual(config);
+      cardinality_estimation::RunSimpleProfileEqual(config, kNumRuns);
     } else if (estimator == "count-min-sketch" || estimator == "cms") {
-      cardinality_estimation::RunCountMinSketch(config, cms_depth, cms_width);
+      cardinality_estimation::RunCountMinSketch(config, kCMSDepth, kCMSWidth, kNumRuns);
     } else {
       std::cout << "Unknown estimator: " << estimator << "\n";
       std::cout << "Available estimators: tug-of-war, simple-profile, count-min-sketch\n";

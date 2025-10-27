@@ -250,33 +250,73 @@ int32_t cms_check_mean_min_float(CountMinSketch* cms, double key);
 uint64_t* cms_get_hashes_int(CountMinSketch* cms, int64_t key);
 uint64_t* cms_get_hashes_float(CountMinSketch* cms, double key);
 
-/**------------------------------------------------------------------------
-**                       END SECTION
-*------------------------------------------------------------------------**/
-
 #ifdef __cplusplus
 }  // extern "C"
 #endif
 
-// C++ Interface
+// ---------------- C++ Interface ----------------
+#include <array>
+#include <chrono>  // high_resolution_clock, duration
 #include <cstddef>  // NULL
 #include <vector>
 
 #include "predicate.h"
 #include "table.h"
 
+// Optimized version for column homogeneous predicates.
+// In this scenario, for self-join size estimation, we build
+// the sketch only once.
 CountMinSketch BuildSketch(
     const unsigned int depth, 
     const unsigned int width,
     const cardinality_estimation::Table& table,
-    const std::vector<cardinality_estimation::Predicate>& predicates,
-    const bool col_homogenenous = true);
+    const std::vector<cardinality_estimation::Predicate>& predicates);
+
+// Overloaded function for dealing with column heterogeneous predicates.
+// In this scenario, each "table" receives a different sketch to estimate.
+// For example, consider the following predicate: t.A = t'.B. Then,
+// we build a CMS for t.A and another CMS for t'.B.
+// Just like in the original paper, we consider both sides of the equality
+// predicate as different tables and estimate the inner product of their
+// sketches.
+// ---------------------------------------------------------------------------
+// Procedure:
+//  - simple: build a sketch for each attribute on the equality,
+//            then estimate using the inner product of the two sketches
+//            (just like cited in the original paper).
+//  - complex: build a sketch for each table, where for each table
+//             we concatenate the values of all attributes involved
+//             in the predicates.
+//             Then, estimate using the inner product of the two sketches.
+//
+// Example:
+//   - t.A = t'.B AND t.C = t'.D
+//  -->i.e., combine and return matching tuples where the pair (A, C) from one
+//     side matches the pair (B, D) from the other side.
+//     We build a sketch for t with the concatenated values of (A, C)
+//     and another sketch for t' with the concatenated values of (B, D).
+//     Then, estimate the inner product of the two sketches.
+// ---------------------------------------------------------------------------
+// Note that this is at most two sketches for both 
+// simple and complex predicates.
+std::array<CountMinSketch, 2> BuildSketchComplex(
+    const unsigned int depth, 
+    const unsigned int width,
+    const cardinality_estimation::Table& table,
+    const std::vector<cardinality_estimation::Predicate>& predicates);
 
 const double CMSInnerProduct(
     const cardinality_estimation::Table& table,
     const std::vector<cardinality_estimation::Predicate>& predicates,
     const unsigned int depth,
     const unsigned int width,
-    const bool col_homogeneous = true);
+    std::chrono::duration<double, std::milli>& build_time,
+    std::chrono::duration<double, std::milli>& estimation_time,
+    const bool col_homogeneous = false);
+
 
 #endif  // BARRUST_SIMPLE_COUNT_MIN_SKETCH_H__
+
+/**------------------------------------------------------------------------
+**                       END SECTION
+*------------------------------------------------------------------------**/

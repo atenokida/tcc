@@ -11,6 +11,7 @@
 
 #pragma once
 
+#include <chrono>  // high_resolution_clock, duration
 #include <memory>  // shared_ptr
 #include <vector>
 
@@ -35,14 +36,18 @@ class TugOfWar {
            const unsigned int width, // memory in bytes
            const uint32_t hash_seed = 1000);
 
-  const double EstimateEquality(const Table& table, 
-                                const Predicate& predicate);
+  const double EstimateEquality(
+      const Table& table, const Predicate& predicate,
+      std::chrono::duration<double, std::milli>& build_time,
+      std::chrono::duration<double, std::milli>& estimation_time);
 
   // Tug-of-War only supports single equality predicates.
   // For conjunctive predicates, we hash combined attribute values
   // as one distinct value.
-  const double EstimateEquality(const Table& table, 
-                                const std::vector<Predicate>& predicates);
+  const double EstimateEquality(
+      const Table& table, const std::vector<Predicate>& predicates,
+      std::chrono::duration<double, std::milli>& build_time,
+      std::chrono::duration<double, std::milli>& estimation_time);
 
   // Estimate the second frequency moment (= self-join size).
   static const double F2Est(const TugOfWar& sketch);

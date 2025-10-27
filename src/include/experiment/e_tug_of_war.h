@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstdint>  // uint32_t
+#include <cstdint>  // uint32_t, size_t
 
 #include "cardinality_estimation/tug_of_war.h"
 #include "cardinality_estimation/utils.h"
@@ -15,6 +15,7 @@ namespace cardinality_estimation {
 extern void RunTugOfWar(const struct cardinality_estimation::ExperimentConfig& config,
                         const unsigned int depth,
                         const unsigned int width,
+                        std::size_t num_runs = 1,
                         const uint32_t hash_seed = 1000,
                         const std::string& output_file = "../../results/tow");
 

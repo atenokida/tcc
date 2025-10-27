@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>  // size_t
+
 #include "cardinality_estimation/count_min_sketch.h"
 #include "cardinality_estimation/utils.h"
 
@@ -11,6 +13,7 @@ extern void RunCountMinSketch(
     const struct cardinality_estimation::ExperimentConfig& config,
     const unsigned int depth,
     const unsigned int width,
+    std::size_t num_runs = 1,
     const std::string& output_file = "../../results/cms");
 
 }  // namespace cardinality_estimation
