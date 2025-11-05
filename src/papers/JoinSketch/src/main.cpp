@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <iostream>
 #include <numeric>
+#include <sstream>
 #include <vector>
 
 #include "include/Choose_Ske.h"
@@ -24,7 +25,7 @@ vector<double> experiment_MEM, experiment_MAX, experiment_MIN, experiment_ARE,
     experiment_JOT;
 vector<vector<double> > experiment_all;
 int data_delimiter;
-void readFile_CAIDA(const char *filename, int length = 13,
+void readFile_CAIDA(const char* filename, int length = 13,
                     int MAX_ITEM = INT32_MAX) {
   ifstream inFile(filename, ios::binary);
 
@@ -65,16 +66,105 @@ void readFile_CAIDA(const char *filename, int length = 13,
   cout << "large flow sum = " << thres_large << endl;
   cout << "Join Ground Truth = " << Join_Ground_Truth << endl << endl;
 }
-
-void readFile_zipf(const char *filename, int length = 4,
+void readFile_zipf(const char* filename, int length = 4,
                    int MAX_ITEM = INT32_MAX) {
+  ifstream inFile(filename);
+
+  if (!inFile.is_open()) cout << "File fail." << endl;
+
+  int max_freq = 0;
+  string line;
+
+  if (getline(inFile, line)) {
+    stringstream ss(line);
+    string firstField;
+    if (getline(ss, firstField)) {
+      bool isHeader = false;
+      for (const char c : firstField) {
+        if (!isdigit(c) && c != '-' && c != '.') {
+          std::cout << "Digit: " << "(" << c << ")\n";  // debug
+          isHeader = true;
+          break;
+        }
+      }
+      // debug
+      std::cout << "Is header: " << isHeader << "\n";
+      std::cout << "First field: " << firstField << "\n";
+      if (!isHeader) {
+        inFile.seekg(0);
+      }
+    }
+  }
+
+  // int test = 0;
+  int count = 0;
+
+  while (getline(inFile, line) && count < MAX_ITEM) {
+    // debug
+    if (count == 5) {
+      for (const auto& element : items) {
+        std::cout << "(" << element << ")";
+      }
+      // test++;
+    }
+
+    string key = line;
+
+    key.erase(0, key.find_first_not_of(" \t\r\n"));
+    key.erase(key.find_last_not_of(" \t\r\n") + 1);
+
+    if (key.length() > length) {
+      key = key.substr(0, length);
+    }
+
+    items.push_back(key);
+    count++;
+  }
+
+  data_delimiter = items.size() / 2;
+  for (int i = 0; i < items.size(); i++) {
+    if (i < data_delimiter)
+      freq1[items[i]]++;
+    else
+      freq0[items[i]]++;
+  }
+  inFile.close();
+
+  for (auto pr : freq0) max_freq = max(max_freq, pr.second);
+  for (auto pr : freq1) max_freq = max(max_freq, pr.second);
+
+  for (auto pr : freq0) {
+    if (freq1.count(pr.first)) {
+      if (pr.second > Heavy_Thes) thres_large++;
+      Join_Ground_Truth += 1ll * pr.second * freq1[pr.first];
+    }
+  }
+  item_num = items.size();
+  flow_num = freq0.size() + freq1.size();
+  cout << "dataset name: " << filename << endl;
+  cout << flow_num << " flows, " << items.size() << " items read" << endl;
+  cout << "max freq = " << max_freq << endl;
+  cout << "large flow sum = " << thres_large << endl;
+  cout << "Join Ground Truth = " << Join_Ground_Truth << endl << endl;
+}
+
+void readFile_zipf_old(const char* filename, int length = 4,
+                       int MAX_ITEM = INT32_MAX) {
   ifstream inFile(filename, ios::binary);
 
   if (!inFile.is_open()) cout << "File fail." << endl;
 
   int max_freq = 0;
   char key[length];
+
+  int test = 0;
   for (int i = 0; i < MAX_ITEM; ++i) {
+    if (test < 5 && i > 1) {
+      for (const auto& element : items) {
+        std::cout << "(" << element << ")";
+      }
+      test++;
+    }
     inFile.read(key, length);
     if (inFile.gcount() < length) break;
     items.push_back(string(key, KEY_LEN));
@@ -109,6 +199,9 @@ void readFile_zipf(const char *filename, int length = 4,
 void test_ske(int mem_in_byte, int D, int CHOOSE) {
   int d = D;            // counts of hash function
   int w = mem_in_byte;  //   bits/counter_size/hash_counts
+  // vector<float> q_errors = {0};
+  // uint64_t q_error = 0;
+  long double estimate = 0;
 
   long double _ARE = 0, _AAE = 0, Mx = 0, Mn = Join_Ground_Truth, X2 = 0, X = 0,
               Con = 0, INT = 0, JOT = 0;
@@ -134,6 +227,20 @@ void test_ske(int mem_in_byte, int D, int CHOOSE) {
     JOT += 1.0 * (clock() - st) / CLOCKS_PER_SEC;
 
     _AAE += abs(my - Join_Ground_Truth);
+
+    // debug
+    // std::cout << i
+    //           << " Q-error: "
+    //           << max((my/Join_Ground_Truth), (Join_Ground_Truth/my))
+    //           << " Estimated: " << my
+    //           << " Ground Truth: " << Join_Ground_Truth
+    //           << "\n";
+    // q_errors.push_back(max((my/Join_Ground_Truth), (Join_Ground_Truth/my)));
+    // q_error += max((my/Join_Ground_Truth), (Join_Ground_Truth/my));
+    estimate += my;
+    std::cout << " Estimated value: " << my << "\n";
+    // -------------------------------------------------------------
+
     Mx = max(Mx, abs(my - Join_Ground_Truth));
     Mn = min(Mn, abs(my - Join_Ground_Truth));
     _ARE += 1.0 * abs(my - Join_Ground_Truth) / Join_Ground_Truth;
@@ -142,6 +249,21 @@ void test_ske(int mem_in_byte, int D, int CHOOSE) {
     Con += (my - Join_Ground_Truth) * (my - Join_Ground_Truth);
     all.push_back((my - Join_Ground_Truth));
   }
+  // debug
+  // q_error/=testcycles;
+  estimate /= testcycles;
+  std::cout << " Average Estimated value: " << estimate << "\n";
+  std::cout << " Insertion time: " << INT / testcycles << " seconds\n";
+  std::cout << " Join time: " << JOT / testcycles << " seconds\n";
+
+  ofstream oFile;
+  char oFilename[50];
+  sprintf(oFilename, "result_est.csv", CHOOSE);
+  oFile.open(oFilename, ios::app);
+  oFile << "average-estimated-value:" << estimate << endl;
+  oFile.close();
+  // -----------------------------------------------------------------------
+
   _AAE /= testcycles;
   _ARE /= testcycles;
   Con /= testcycles;
@@ -164,8 +286,8 @@ void test_ske(int mem_in_byte, int D, int CHOOSE) {
 }
 #include <boost/program_options.hpp>
 using namespace boost::program_options;
-void ParseArg(int argc, char *argv[], char *filename, int &len, int &sz,
-              int &CHOOSE) {
+void ParseArg(int argc, char* argv[], char* filename, int& len, int& sz,
+              int& CHOOSE) {
   options_description opts("Join Options");
 
   opts.add_options()("memory,m", value<int>()->required(), "memory size")(
@@ -205,7 +327,7 @@ void ParseArg(int argc, char *argv[], char *filename, int &len, int &sz,
     exit(0);
   }
 }
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   char filename[100];
   int sz, CHOOSE, len;
   ParseArg(argc, argv, filename, len, sz, CHOOSE);
