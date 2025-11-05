@@ -168,3 +168,73 @@ SIMPLE-PROFILE,age = age AND department = department,2000000,8.33333e+10,681.34,
 SIMPLE-PROFILE,age = age AND department = department,2000000,8.33333e+10,680.387,0.0016
 SIMPLE-PROFILE,TOTAL,gen1_2000000.csv,,,6818.91
 
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,10000,8739.73,2.9647,0.0011
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,10000,8739.73,2.9272,0.0008
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,10000,8739.73,2.9482,0.0014
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,10000,8739.73,2.8867,0.0007
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,10000,8739.73,2.9209,0.0009
+SIMPLE-PROFILE,TOTAL,imdb_movie_companies_10000.csv,,,14.7163
+
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,100000,158173,34.3913,0.0017
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,100000,158173,32.9615,0.0015
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,100000,158173,33.2478,0.0011
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,100000,158173,33.2558,0.0009
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,100000,158173,34.9801,0.0015
+SIMPLE-PROFILE,TOTAL,imdb_movie_companies_100000.csv,,,168.922
+
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,500000,1.37832e+06,180.701,0.0016
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,500000,1.37832e+06,177.008,0.0018
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,500000,1.37832e+06,179.859,0.0016
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,500000,1.37832e+06,188.749,0.0015
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,500000,1.37832e+06,179.728,0.0019
+SIMPLE-PROFILE,TOTAL,imdb_movie_companies_500000.csv,,,906.153
+
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,1000000,3.61562e+06,378.368,0.0021
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,1000000,3.61562e+06,373.762,0.0017
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,1000000,3.61562e+06,367.844,0.0016
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,1000000,3.61562e+06,368.276,0.0019
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,1000000,3.61562e+06,370.241,0.0025
+SIMPLE-PROFILE,TOTAL,imdb_movie_companies_1000000.csv,,,1858.6
+
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,2000000,9.79235e+06,771.175,0.0016
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,2000000,9.79235e+06,777.212,0.0017
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,2000000,9.79235e+06,772.155,0.0016
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,2000000,9.79235e+06,778.723,0.0016
+SIMPLE-PROFILE,company_id = company_id AND company_type_id = company_type_id,2000000,9.79235e+06,772.793,0.0016
+SIMPLE-PROFILE,TOTAL,imdb_movie_companies_2000000.csv,,,3872.17
+
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,10000,475.765,2.9236,0.0014
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,10000,475.765,3.361,0.0018
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,10000,475.765,3.3862,0.0016
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,10000,475.765,3.0728,0.0014
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,10000,475.765,3.2792,0.001
+SIMPLE-PROFILE,TOTAL,imdb_person_info_10000.csv,,,16.1146
+
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,100000,5796.89,36.6506,0.0016
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,100000,5796.89,34.4301,0.0017
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,100000,5796.89,41.9446,0.0017
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,100000,5796.89,35.402,0.0011
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,100000,5796.89,34.0675,0.0009
+SIMPLE-PROFILE,TOTAL,imdb_person_info_100000.csv,,,182.582
+
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,500000,43811.1,189.155,0.0016
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,500000,43811.1,188.163,0.0016
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,500000,43811.1,187.045,0.0015
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,500000,43811.1,186.283,0.0015
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,500000,43811.1,185.263,0.0014
+SIMPLE-PROFILE,TOTAL,imdb_person_info_500000.csv,,,936.012
+
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,1000000,119491,397.067,0.0019
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,1000000,119491,389.285,0.0017
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,1000000,119491,386.079,0.0014
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,1000000,119491,382.495,0.0017
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,1000000,119491,390.488,0.0017
+SIMPLE-PROFILE,TOTAL,imdb_person_info_1000000.csv,,,1945.52
+
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,2000000,364901,792.508,0.0023
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,2000000,364901,809.286,0.0016
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,2000000,364901,810.652,0.0017
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,2000000,364901,792.42,0.002
+SIMPLE-PROFILE,person_id = person_id AND info_type_id = info_type_id,2000000,364901,799.514,0.0016
+SIMPLE-PROFILE,TOTAL,imdb_person_info_2000000.csv,,,4004.51
+

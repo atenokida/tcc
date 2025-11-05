@@ -1,0 +1,80 @@
+JOIN-SKETCH,age = age,10000,2.50175e+06,0.0006224,4.26e-05
+JOIN-SKETCH,age = age AND department = department,10000,2.50175e+06,0.0005882,3.92e-05
+JOIN-SKETCH,department = department,10000,2.87338e+07,0.0005708,3.9e-05
+JOIN-SKETCH,TOTAL,gen0_10000.csv,,,0.0019022
+
+JOIN-SKETCH,age = age,100000,2.49622e+08,0.0053688,5.44e-05
+JOIN-SKETCH,age = age AND department = department,100000,2.49622e+08,0.005839,6e-05
+JOIN-SKETCH,department = department,100000,2.87075e+09,0.0048072,4.28e-05
+JOIN-SKETCH,TOTAL,gen0_100000.csv,,,0.0161722
+
+JOIN-SKETCH,age = age,500000,6.23625e+09,0.0248252,5.62e-05
+JOIN-SKETCH,age = age AND department = department,500000,6.23625e+09,0.0262222,5.38e-05
+JOIN-SKETCH,department = department,500000,7.17583e+10,0.0243332,4.06e-05
+JOIN-SKETCH,TOTAL,gen0_500000.csv,,,0.0755312
+
+JOIN-SKETCH,age = age,1000000,2.49236e+10,0.047561,5.28e-05
+JOIN-SKETCH,age = age AND department = department,1000000,2.49236e+10,0.0501416,5.92e-05
+JOIN-SKETCH,department = department,1000000,2.87273e+11,0.0474338,4.06e-05
+JOIN-SKETCH,TOTAL,gen0_1000000.csv,,,0.145289
+
+JOIN-SKETCH,age = age,2000000,9.96142e+10,0.0991764,6.34e-05
+JOIN-SKETCH,age = age AND department = department,2000000,9.96142e+10,0.0974124,5.72e-05
+JOIN-SKETCH,department = department,2000000,1.14922e+12,0.0968064,4.8e-05
+JOIN-SKETCH,TOTAL,gen0_2000000.csv,,,0.2935638
+
+JOIN-SKETCH,age = age,10000,2.09182e+06,0.0006004,4.74e-05
+JOIN-SKETCH,department = department,10000,2.09182e+06,0.0006302,4.6e-05
+JOIN-SKETCH,age = age AND department = department,10000,2.09182e+06,0.0005904,4.06e-05
+JOIN-SKETCH,TOTAL,gen1_10000.csv,,,0.001955
+
+JOIN-SKETCH,age = age,100000,2.0841e+08,0.0116216,2.72e-05
+JOIN-SKETCH,department = department,100000,2.885e+09,0.0112828,3.52e-05
+JOIN-SKETCH,age = age AND department = department,100000,2.0841e+08,0.0113874,3.04e-05
+JOIN-SKETCH,TOTAL,gen1_100000.csv,,,0.0343846
+
+JOIN-SKETCH,age = age,500000,5.20888e+09,0.0606358,5.14e-05
+JOIN-SKETCH,department = department,500000,7.40153e+09,0.0470052,3.16e-05
+JOIN-SKETCH,age = age AND department = department,500000,5.20888e+09,0.0573786,4.78e-05
+JOIN-SKETCH,TOTAL,gen1_500000.csv,,,0.1651504
+
+JOIN-SKETCH,age = age,1000000,2.08345e+10,0.121837,5.46e-05
+JOIN-SKETCH,department = department,1000000,-4.62549e+09,0.093671,3.02e-05
+JOIN-SKETCH,age = age AND department = department,1000000,2.08345e+10,0.112956,5.32e-05
+JOIN-SKETCH,TOTAL,gen1_1000000.csv,,,0.3286018
+
+JOIN-SKETCH,age = age,2000000,8.33363e+10,0.241473,5.42e-05
+JOIN-SKETCH,department = department,2000000,2.7879e+09,0.203739,2.8e-05
+JOIN-SKETCH,age = age AND department = department,2000000,8.33363e+10,0.22636,5.06e-05
+JOIN-SKETCH,TOTAL,gen1_2000000.csv,,,0.6717048
+
+JOIN-SKETCH,company_id = company_id AND company_type_id = company_type_id,10000,423162,0.0007032,0.0001042
+JOIN-SKETCH,TOTAL,imdb_movie_companies_10000.csv,,,0.0008074
+
+JOIN-SKETCH,company_id = company_id AND company_type_id = company_type_id,100000,4.19312e+07,0.007039,0.0001252
+JOIN-SKETCH,TOTAL,imdb_movie_companies_100000.csv,,,0.0071642
+
+JOIN-SKETCH,company_id = company_id AND company_type_id = company_type_id,500000,1.03698e+09,0.0362366,0.0001414
+JOIN-SKETCH,TOTAL,imdb_movie_companies_500000.csv,,,0.036378
+
+JOIN-SKETCH,company_id = company_id AND company_type_id = company_type_id,1000000,4.13088e+09,0.0713178,0.0001742
+JOIN-SKETCH,TOTAL,imdb_movie_companies_1000000.csv,,,0.071492
+
+JOIN-SKETCH,company_id = company_id AND company_type_id = company_type_id,2000000,1.6477e+10,0.143426,0.0002724
+JOIN-SKETCH,TOTAL,imdb_movie_companies_2000000.csv,,,0.1436984
+
+JOIN-SKETCH,person_id = person_id AND info_type_id = info_type_id,10000,280189,0.0007034,0.0001024
+JOIN-SKETCH,TOTAL,imdb_person_info_10000.csv,,,0.0008058
+
+JOIN-SKETCH,person_id = person_id AND info_type_id = info_type_id,100000,2.6756e+07,0.0069836,0.0001238
+JOIN-SKETCH,TOTAL,imdb_person_info_100000.csv,,,0.0071074
+
+JOIN-SKETCH,person_id = person_id AND info_type_id = info_type_id,500000,6.67897e+08,0.0434594,0.0001444
+JOIN-SKETCH,TOTAL,imdb_person_info_500000.csv,,,0.0436038
+
+JOIN-SKETCH,person_id = person_id AND info_type_id = info_type_id,1000000,2.6701e+09,0.0676696,0.000143
+JOIN-SKETCH,TOTAL,imdb_person_info_1000000.csv,,,0.0678126
+
+JOIN-SKETCH,person_id = person_id AND info_type_id = info_type_id,2000000,1.06744e+10,0.143341,0.0002228
+JOIN-SKETCH,TOTAL,imdb_person_info_2000000.csv,,,0.1435638
+

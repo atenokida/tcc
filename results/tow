@@ -168,3 +168,73 @@ TUG-OF-WAR,age = age AND department = department,2000000,1.05873e+14,129503,0.04
 TUG-OF-WAR,age = age AND department = department,2000000,1.07619e+14,129560,0.0475
 TUG-OF-WAR,TOTAL,gen1_2000000.csv,,,1.27615e+06
 
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,10000,786496,673.411,0.0475
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,10000,3.14599e+06,675.145,0.0501
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,10000,7.07847e+06,678.625,0.0491
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,10000,1.25839e+07,687.399,0.0605
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,10000,1.96624e+07,684.954,0.0497
+TUG-OF-WAR,TOTAL,imdb_movie_companies_10000.csv,,,3403.74
+
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,100000,7.65346e+07,6826.75,0.0612
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,100000,3.06138e+08,6805.51,0.0485
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,100000,6.88811e+08,6637.81,0.048
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,100000,1.22455e+09,6627.6,0.0491
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,100000,1.91336e+09,6677.96,0.0473
+TUG-OF-WAR,TOTAL,imdb_movie_companies_100000.csv,,,33609.2
+
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,500000,1.89665e+09,33028.5,0.0489
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,500000,7.58661e+09,33107.3,0.0482
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,500000,1.70699e+10,33184.3,0.0473
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,500000,3.03464e+10,33119.8,0.0478
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,500000,4.74163e+10,33069,0.0473
+TUG-OF-WAR,TOTAL,imdb_movie_companies_500000.csv,,,165672
+
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,1000000,7.5504e+09,66599.6,0.0484
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,1000000,3.02016e+10,66621.6,0.0472
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,1000000,6.79536e+10,66424.9,0.0816
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,1000000,1.20806e+11,66427.5,0.0474
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,1000000,1.8876e+11,66207.1,0.0476
+TUG-OF-WAR,TOTAL,imdb_movie_companies_1000000.csv,,,332606
+
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,2000000,3.01704e+10,132609,0.0478
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,2000000,1.20682e+11,132336,0.0481
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,2000000,2.71534e+11,132427,0.0486
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,2000000,4.82726e+11,132516,0.0477
+TUG-OF-WAR,company_id = company_id AND company_type_id = company_type_id,2000000,7.5426e+11,132450,0.0473
+TUG-OF-WAR,TOTAL,imdb_movie_companies_2000000.csv,,,663047
+
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,10000,438898,681.783,0.0483
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,10000,1.75559e+06,664.396,0.0474
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,10000,3.95008e+06,654.983,0.0482
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,10000,7.02237e+06,667.901,0.048
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,10000,1.09725e+07,670.717,0.0478
+TUG-OF-WAR,TOTAL,imdb_person_info_10000.csv,,,3343.41
+
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,100000,4.33729e+07,6692.56,0.0485
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,100000,1.73491e+08,6665.85,0.0488
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,100000,3.90356e+08,6670.79,0.0474
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,100000,6.93966e+08,6618.81,0.0559
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,100000,1.08432e+09,6644.01,0.0473
+TUG-OF-WAR,TOTAL,imdb_person_info_100000.csv,,,33325.3
+
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,500000,1.09146e+09,33245.5,0.0488
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,500000,4.36582e+09,33084.1,0.0475
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,500000,9.8231e+09,33126.8,0.0477
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,500000,1.74633e+10,33118.8,0.0484
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,500000,2.72864e+10,33116.8,0.0478
+TUG-OF-WAR,TOTAL,imdb_person_info_500000.csv,,,165856
+
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,1000000,4.35491e+09,66511.9,0.048
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,1000000,1.74196e+10,66283.8,0.0489
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,1000000,3.91942e+10,66173,0.0473
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,1000000,6.96786e+10,66287.9,0.0476
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,1000000,1.08873e+11,66178.6,0.0492
+TUG-OF-WAR,TOTAL,imdb_person_info_1000000.csv,,,331762
+
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,2000000,1.73908e+10,133139,0.0476
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,2000000,6.95632e+10,132967,0.048
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,2000000,1.56517e+11,132740,0.0479
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,2000000,2.78253e+11,132612,0.0475
+TUG-OF-WAR,person_id = person_id AND info_type_id = info_type_id,2000000,4.3477e+11,133059,0.0486
+TUG-OF-WAR,TOTAL,imdb_person_info_2000000.csv,,,665172
+

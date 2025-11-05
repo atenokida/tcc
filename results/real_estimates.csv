@@ -53,3 +53,13 @@ tax_10k,tax_10000.csv,AreaCode = AreaCode AND Phone = Phone,10000
 tax_10k,tax_10000.csv,State = State AND HasChild = HasChild,970784
 tax_500k,tax_500000.csv,AreaCode = AreaCode AND Phone = Phone,500000
 tax_500k,tax_500000.csv,State = State AND HasChild = HasChild,2404381172
+imdb_movie_companies_100k,imdb_movie_companies_100000.csv,company_id = company_id AND company_type_id = company_type_id,13745000
+imdb_movie_companies_10k,imdb_movie_companies_10000.csv,company_id = company_id AND company_type_id = company_type_id,143738
+imdb_movie_companies_1m,imdb_movie_companies_1000000.csv,company_id = company_id AND company_type_id = company_type_id,1317808816
+imdb_movie_companies_2m,imdb_movie_companies_2000000.csv,company_id = company_id AND company_type_id = company_type_id,5257978346
+imdb_movie_companies_500k,imdb_movie_companies_500000.csv,company_id = company_id AND company_type_id = company_type_id,333958716
+imdb_person_info_100k,imdb_person_info_100000.csv,person_id = person_id AND info_type_id = info_type_id,129220
+imdb_person_info_10k,imdb_person_info_10000.csv,person_id = person_id AND info_type_id = info_type_id,10378
+imdb_person_info_1m,imdb_person_info_1000000.csv,person_id = person_id AND info_type_id = info_type_id,3826542
+imdb_person_info_2m,imdb_person_info_2000000.csv,person_id = person_id AND info_type_id = info_type_id,13248994
+imdb_person_info_500k,imdb_person_info_500000.csv,person_id = person_id AND info_type_id = info_type_id,1204442
