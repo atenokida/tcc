@@ -1,6 +1,6 @@
 /**----------------------------------------------
  * ?                    ABOUT
- * @author      : atenokida
+ * @author      : XXXX-1
  * @createdOn   : 17/october/2024
  * @lastUpdate  : 21/june/2025
  * @brief       : Header file for query predicate.

@@ -1,6 +1,6 @@
 /**----------------------------------------------
  * ?                    ABOUT
- * @author      : atenokida
+ * @author      : XXXX-1
  * @createdOn   : 21/june/2025
  * @brief       : Header file for the "assumption estimator" using the Simple
  *                Profile (System R) statistics.

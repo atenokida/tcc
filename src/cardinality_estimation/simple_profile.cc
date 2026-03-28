@@ -1,6 +1,6 @@
 /**----------------------------------------------
  * ?                    ABOUT
- * @author      : atenokida
+ * @author      : XXXX-1
  * @createdOn   : 21/june/2025
  * @brief       : Implementation file for `simple_profile.h`.
  *---------------------------------------------**/

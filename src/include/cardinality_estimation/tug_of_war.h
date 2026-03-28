@@ -1,6 +1,6 @@
 /**----------------------------------------------
  * ?                    ABOUT
- * @author      : atenokida
+ * @author      : XXXX-1
  * @createdOn   : 29/june/2025
  * @brief       : Header file for the Tug of War Algorithm.
  *                Adapted from:
